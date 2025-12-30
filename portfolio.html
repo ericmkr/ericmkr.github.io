@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- ASTUCE RESPONSIVE: Meta viewport permet l'adaptation au reste de l'écran selon la largeur du device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="refresh" content="45"> Auto refresh page after 11sec  -->
+  <title>Portfolio — Achievements</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Markazi+Text:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/Logo mkr.jpg" alt="mkr-logo">
+      </a>
+      <div class="header-right">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+        <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a class="btn-timing" href="">⏱ Timing</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Portfolio</h1>
+    <p class="lead">Selected projects showcasing my skills in UX/UI, design, and visualization.</p>
+
+    <section class="portfolio-grid">
+      <article class="project animate-fade" id="FlowTrack" data-id="1">
+        <img src="assets/img/FlowTrack logo.png" alt="FlowTrack mobile app" loading="lazy" decoding="async">
+        <h3>Mobile app UX/UI Design — FlowTrack</h3>
+        <p class="summary">Mobile task management application with intuitive interface and engaging micro-interactions.</p>
+        <div class="case">
+          <h4>Problem</h4>
+          <p>Users find productivity apps too complex and abandon them after a few days of use.</p>
+          <h4>Approach</h4>
+          <p>In-depth user research, simplified information architecture, micro-interactions to encourage daily engagement, iterative testing with real users.</p>
+          <h4>Results</h4>
+          <ul>
+            <li>Prototype tested — 45% increase in retention in the first week.</li>
+            <li>Minimalist interface with smooth onboarding and consistent animations.</li>
+            <li>User satisfaction rating: 4.8/5 stars.</li>
+          </ul>
+          <p class="tools"><strong>Tools :</strong> Miro, Visily, Google Apps Script, Gamma.</p>
+        </div>
+        <button class="view-btn" data-project="FlowTrack" data-title="FlowTrack">See the case</button>
+      </article>
+
+      <article class="project animate-fade" id="Robbie Lens Photographie" data-id="2">
+        <img src="assets/img/Robbie Lens - Web Portfolio.png" alt="Robbie Lens Portfolio" loading="lazy" decoding="async">
+        <h3>Website Portfolio — Robbie Lens Photographie</h3>
+        <p class="summary">Portfolio-style website for photographer.</p>
+        <div class="case">
+          <h4>Problem</h4>
+          <p>Robbie Lens, a passionate photographer, needs a professional website to showcase her portfolio and highlight the quality of her work.</p>
+          <h4>Approach</h4>
+          <p>Gather information about Robbie Lens, her content and services to offer.</p>
+          <!-- <h4>Results</h4>
+          <ul>
+            <li>Réduction du temps de génération de rapport : 40% plus rapide.</li>
+            <li>Adoption accélérée grâce aux vues prédéfinies et templates réutilisables.</li>
+            <li>ROI démontré : économie de 20h/mois par utilisateur.</li> -->
+          </ul>
+          <p class="tools"><strong>Tools :</strong> Visual Studio Code, CodePen, ColorZilla, OpenClassrooms.</p>
+        </div>
+        <button class="view-btn" data-project="Robbie Lens Photographie" data-title="Robbie Lens Photographie">See the case</button>
+      </article>
+
+      <article class="project animate-fade" id="World Wide Wall" data-id="3">
+        <img src="assets/img/World Wide Wall - low fidelity mockup.jpg" alt="World Wide Wall website" loading="lazy" decoding="async">
+        <h3>Low-fidelity mockup for an advertising agency website — World Wide Wall</h3>
+        <p class="summary">A low-fidelity mockup illustrating the structure and key features of the World Wide Wall advertising agency website, focusing on layout, navigation, and the presentation of core services.</p>
+        <div class="case">
+          <h4>Problem</h4>
+          <p>World Wide Wall lacks a clear and user-friendly website structure, making it difficult for visitors to understand its services and engage with the agency. A low-fidelity mockup is needed to define a coherent layout and improve the overall user experience.</p>
+          <h4>Approach</h4>
+          <p>The project begins with a discovery and research phase aimed at understanding user needs, business goals, and the competitive landscape, allowing us to identify what visitors expect from the World Wide Wall website. Based on these insights, we will establish a clear information architecture that organizes content logically, defines navigation flows, and prioritizes essential information to ensure intuitive browsing.</p>
+          <!-- <h4>Results </h4>
+          <ul>
+            <li>Expérience immersive favorisant la compréhension du processus créatif.</li>
+            <li>Accessibilité WCAG AA validée, responsive sur tous les appareils.</li>
+            <li>Performance Core Web Vitals : 95+ Lighthouse score.</li>
+          </ul> -->
+          <p class="tools"><strong>Tools :</strong> Miro, Visily.</p>
+        </div>
+        <button class="view-btn" data-project="World Wide Wall" data-title="World Wide Wall">See the case</button>
+      </article>
+    </section>
+  </main>
+
+  <div id="project-modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button id="modal-close" class="modal-close">Close</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-info">
+      </div>
+      <div id="contact" class="footer-contact">
+        <h3>Contact</h3>
+        <form id="footer-contact-form">
+          <label for="name">Name</label>
+          <input id="name" name="name" required>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3" required></textarea>
+          <button type="submit" class="btn">Submit</button>
+          <p id="contact-feedback" class="feedback" aria-live="polite"></p>
+        </form>
+        <p>&copy; <span id="year"></span> MKR Gang</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">↑</button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

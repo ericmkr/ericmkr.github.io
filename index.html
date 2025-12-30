@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- RESPONSIVE TIP: Meta viewport allows adaptation to the rest of the screen according to the device's width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="refresh" content="45"> Auto refresh page after 11sec  -->
+  <title>Portfolio — Victor Eric MOUKOURI</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Markazi+Text:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/Logo mkr.jpg" alt="mkr-logo">
+      </a>
+      <div class="header-right">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+        <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a class="btn-timing" href="">⏱ Timing</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero parallax animate-fade" data-parallax-speed="0.07">
+      <div class="container">
+        <img src="assets/img/mkr.jpg" alt="photo de Victor Eric MOUKOURI" class="hero-img" loading="lazy" decoding="async">
+        <h1>Graphic Designer</h1>
+        <p class="lead">Young African artist specializing in web and mobile interface design. I combine aesthetics and user experience.</p>
+        <p><a class="btn" href="portfolio.html">See my achievements</a></p>
+      </div>
+    </section>
+
+    <section class="about-preview">
+      <h2>About</h2>
+      <div class="about-content">
+        <p>I am a UX/UI designer, passionate about creating inclusive and aesthetically pleasing interfaces. I enjoy transforming ideas into clear digital experiences.</p>
+        <ul class="about-highlights">
+          <li>Web & Mobile interface design</li>
+          <li>Interactive prototyping</li>
+          <li>User research & testing</li>
+        </ul>
+        <p><a class="more" href="about.html">More...</a></p>
+      </div>
+    </section>
+
+    <section class="featured container animate-fade">
+      <h2>Projects</h2>
+      <div class="grid">
+        <a href="portfolio.html#flowtrack" class="card-link">
+          <article class="card">
+            <img src="assets/img/FlowTrack - HQ Wireframes.png" alt="Aperçu projet 1" loading="lazy" decoding="async">
+            <h3>Mobile app UX/UI Design — FlowTrack</h3>
+            <p>Thoughtful UX design for a mobile task management application.</p>
+          </article>
+        </a>
+
+        <a href="portfolio.html#worldwidewall" class="card-link">
+          <article class="card">
+            <img src="assets/img/www-icon-vector-website-logo.png" alt="Aperçu projet 3" loading="lazy" decoding="async">
+            <h3>Low-fidelity website mockup — World Wide Wall</h3>
+            <p>Design a low fidelity mockup for advertising agency World Wide Wall.</p>
+          </article>
+        </a>
+      </div>
+    </section>
+
+                       <button id="music-toggle" class="music-toggle" type="button" aria-label="Toggle background music">
+              🔇
+            </button>
+            
+            <audio id="bg-music" loop>
+              <source src="assets/audio/background-music.mp3" type="audio/mpeg">
+            </audio>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-info">
+      </div>
+      <div id="contact" class="footer-contact">
+        <h3>Contact</h3>
+        <form id="footer-contact-form">
+          <label for="name">Name</label>
+          <input id="name" name="name" required>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3" required></textarea>
+          <button type="submit" class="btn">Submit</button>
+          <p id="contact-feedback" class="feedback" aria-live="polite"></p>
+        </form>
+        <p>&copy; <span id="year"></span> MKR Gang</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">↑</button>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
