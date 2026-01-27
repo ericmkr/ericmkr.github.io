@@ -131,7 +131,3 @@ Libre d’inspiration, protégé dans son identité.
 - raconter **qui tu es**
 - expliquer **pourquoi tu design**
 - donner envie de **scroller**, pas seulement lire
-
-
-
-ChatGPT can make 
