@@ -115,7 +115,10 @@ Il évoluera avec :
 
 - une optimisation performance & SEO
 
-👤 Auteur
+---
+
+### 👤 Auteur
+
 Victor Eric MOUKOURI
 UX/UI Designer & Front-end Developer
 Fondateur de la vision mkr
@@ -123,11 +126,17 @@ Fondateur de la vision mkr
 Le design n’est pas une décoration.
 C’est une intention rendue visible.
 
-📄 Licence
+---
+
+### 📄 Licence
+
 Projet personnel.
 Libre d’inspiration, protégé dans son identité.
 
+---
+
 ### 🔥 Ce README fait maintenant :
+
 - raconter **qui tu es**
 - expliquer **pourquoi tu design**
 - donner envie de **scroller**, pas seulement lire
