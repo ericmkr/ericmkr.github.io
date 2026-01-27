@@ -117,7 +117,7 @@ Il évoluera avec :
 
 ---
 
-### 👤 Auteur
+## 👤 Auteur
 
 Victor Eric MOUKOURI
 UX/UI Designer & Front-end Developer
@@ -128,14 +128,14 @@ C’est une intention rendue visible.
 
 ---
 
-### 📄 Licence
+## 📄 Licence
 
 Projet personnel.
 Libre d’inspiration, protégé dans son identité.
 
 ---
 
-### 🔥 Ce README fait maintenant :
+## 🔥 Ce README fait maintenant :
 
 - raconter **qui tu es**
 - expliquer **pourquoi tu design**
