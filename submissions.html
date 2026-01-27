@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submissions — Admin</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    /* Small admin tweaks to make the table readable */
+    .admin-actions{ display:flex; gap:.6rem; margin-bottom:1rem; }
+    table.submissions{ width:100%; border-collapse:collapse; background:var(--card); }
+    table.submissions th, table.submissions td{ padding:.6rem; border-bottom:1px solid rgba(255,255,255,0.04); text-align:left; }
+    table.submissions th{ font-weight:700; }
+    .muted { color:var(--muted); font-size:.9rem; }
+    .mono { font-family: monospace, ui-monospace; font-size:.85rem; }
+    .small-btn { padding:.3rem .5rem; border-radius:6px; border:1px solid rgba(255,255,255,0.06); background:transparent; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Stored Submissions</h1>
+    <p class="lead">This page reads submissions saved in <code>localStorage</code> under <strong>portfolio_submissions</strong>.</p>
+
+    <div class="admin-actions">
+      <button id="export-csv" class="small-btn">Export CSV</button>
+      <button id="clear-all" class="small-btn">Clear all</button>
+      <div class="muted">Total: <span id="total">0</span></div>
+    </div>
+
+    <div id="no-data" class="muted">No submissions found.</div>
+
+    <table id="submissions-table" class="submissions" aria-live="polite" style="display:none;">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Message</th>
+          <th>Created At</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <script>
+    // Admin page script — commented for clarity
+    // 1) read localStorage key 'portfolio_submissions'
+    // 2) render rows for each entry (name, email, message, createdAt, status)
+    // 3) provide Export CSV and Clear All actions
+
+    function loadStore(){
+      try{ return JSON.parse(localStorage.getItem('portfolio_submissions') || '[]'); }
+      catch(e){ return []; }
+    }
+
+    function saveStore(arr){
+      try{ localStorage.setItem('portfolio_submissions', JSON.stringify(arr)); }
+      catch(e){ console.error('Failed to save', e); }
+    }
+
+    function render(){
+      var data = loadStore();
+      var table = document.getElementById('submissions-table');
+      var tbody = table.querySelector('tbody');
+      var noData = document.getElementById('no-data');
+      var total = document.getElementById('total');
+      tbody.innerHTML = '';
+      if(!data || data.length === 0){
+        table.style.display = 'none';
+        noData.style.display = 'block';
+        total.textContent = 0;
+        return;
+      }
+      table.style.display = '';
+      noData.style.display = 'none';
+      total.textContent = data.length;
+
+      data.slice().reverse().forEach(function(entry){
+        var tr = document.createElement('tr');
+
+        var tdName = document.createElement('td'); tdName.textContent = entry.name || ''; tr.appendChild(tdName);
+        var tdEmail = document.createElement('td'); tdEmail.textContent = entry.email || ''; tr.appendChild(tdEmail);
+        var tdMsg = document.createElement('td'); tdMsg.textContent = entry.message || ''; tr.appendChild(tdMsg);
+        var tdCreated = document.createElement('td'); tdCreated.textContent = entry.createdAt ? new Date(entry.createdAt).toLocaleString() : ''; tr.appendChild(tdCreated);
+        var tdStatus = document.createElement('td'); tdStatus.textContent = entry.status || ''; tr.appendChild(tdStatus);
+
+        var tdActions = document.createElement('td');
+        // delete single entry
+        var del = document.createElement('button'); del.className = 'small-btn'; del.textContent = 'Delete';
+        del.addEventListener('click', function(){
+          if(!confirm('Delete this submission?')) return;
+          var store = loadStore().filter(function(i){ return i.id !== entry.id; });
+          saveStore(store); render();
+        });
+        tdActions.appendChild(del);
+        tr.appendChild(tdActions);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Build CSV from stored submissions and trigger download
+    function exportCSV(){
+      var data = loadStore();
+      if(!data || data.length === 0){ alert('No submissions to export'); return; }
+      var headers = ['id','formId','name','email','message','createdAt','status'];
+      var rows = [headers.join(',')];
+      data.forEach(function(r){
+        var vals = headers.map(function(h){
+          var v = r[h] === undefined || r[h] === null ? '' : String(r[h]);
+          // escape simple CSV quotes
+          return '"' + v.replace(/"/g,'""') + '"';
+        });
+        rows.push(vals.join(','));
+      });
+      var csv = rows.join('\n');
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a'); a.href = url; a.download = 'submissions.csv';
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('export-csv').addEventListener('click', exportCSV);
+    document.getElementById('clear-all').addEventListener('click', function(){
+      if(!confirm('Clear all stored submissions? This cannot be undone.')) return;
+      saveStore([]); render();
+    });
+
+    // initial render
+    render();
+
+    // expose helper for console convenience
+    window.reloadStoredSubmissions = render;
+  </script>
+</body>
+</html>

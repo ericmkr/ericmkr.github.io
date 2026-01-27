@@ -115,14 +115,73 @@
     });
   }
 
+  /*
+   * Local storage helpers
+   * - store submissions locally so you can access them later
+   * - structure: array of { id, formId, name, email, message, createdAt, status, meta }
+   */
+  function _loadLocalSubmissions(){
+    try{ return JSON.parse(localStorage.getItem('portfolio_submissions')||'[]'); }catch(e){ return []; }
+  }
+
+  function _saveLocalSubmissions(arr){
+    try{ localStorage.setItem('portfolio_submissions', JSON.stringify(arr)); }catch(e){ /* Storage might be full or disabled */ }
+  }
+
+  // Save a new submission locally and return its local id
+  function saveSubmissionLocally(formId, payload){
+    var store = _loadLocalSubmissions();
+    var entry = {
+      id: 's_' + Date.now() + '_' + Math.floor(Math.random()*10000),
+      formId: formId || null,
+      name: payload.name || '',
+      email: payload.email || '',
+      message: payload.message || '',
+      createdAt: new Date().toISOString(),
+      status: payload.status || 'pending', // pending | sent | failed
+      meta: payload.meta || null
+    };
+    store.push(entry);
+    _saveLocalSubmissions(store);
+    return entry.id;
+  }
+
+  // Update a previously saved submission's status/meta by id
+  function updateLocalSubmission(id, updates){
+    var store = _loadLocalSubmissions();
+    var found = false;
+    for(var i=0;i<store.length;i++){
+      if(store[i].id === id){
+        Object.assign(store[i], updates || {});
+        found = true;
+        break;
+      }
+    }
+    if(found) _saveLocalSubmissions(store);
+    return found;
+  }
+
+  // Expose a simple accessor on window for quick retrieval in the console
+  window.getStoredSubmissions = function(){ return _loadLocalSubmissions(); };
+
   function bindContact(idForm,idFeedback){
     var form = document.getElementById(idForm);
     if(!form) return;
     var feedback = document.getElementById(idFeedback);
     var submitBtn = form.querySelector('button[type="submit"], .btn');
 
+    // cooldown timestamp (ms) for this form id to avoid rapid resubmits
+    // stored on the form element to keep scope simple
+    if(!form._submitCooldown) form._submitCooldown = 0;
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
+      var now = Date.now();
+      if(form._submitCooldown && now < form._submitCooldown){
+        var remaining = Math.ceil((form._submitCooldown - now)/1000);
+        if(feedback) feedback.textContent = '❌ Please wait ' + remaining + 's before sending again.';
+        return;
+      }
       var name = form.querySelector('[name="name"]').value.trim();
       var email = form.querySelector('[name="email"]').value.trim();
       var msg = (form.querySelector('[name="message"]')||{value:''}).value.trim();
@@ -140,18 +199,50 @@
       if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
       if(feedback) feedback.textContent = 'Envoi en cours...';
 
+      // Save submission locally immediately (so you have a copy regardless of network)
+      var localId = saveSubmissionLocally(idForm, {
+        name: name,
+        email: email,
+        message: msg,
+        status: 'pending',
+        meta: { note: 'Saved locally before network send' }
+      });
+
+      // Send to remote endpoint (FormSubmit). We keep the UI locked and store the
+      // remote result/possible error back to local storage for later inspection.
       sendContact({ name: name, email: email, message: msg })
-        .then(function(){
+        .then(function(res){
+          // remote returned success JSON
           if(feedback) feedback.textContent = '✅ Message sent successfully!';
           form.reset();
           showSubmitConfirmation('Message sent', 'Thank you — your message has been sent.');
+
+          // update local copy to mark as sent and attach remote response
+          try{ updateLocalSubmission(localId, { status: 'sent', meta: { response: res } }); }catch(e){}
+
+          // start cooldown of 11 seconds to prevent repeated requests
+          form._submitCooldown = Date.now() + 11000; // 11 seconds
+          // keep button disabled during cooldown, then restore
+          if(submitBtn){
+            submitBtn.disabled = true;
+            setTimeout(function(){ if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'Submit'; } }, 11000);
+          }
           setTimeout(function(){ if(feedback) feedback.textContent = ''; }, 3000);
         })
-        .catch(function(){
+        .catch(function(err){
+          // network or remote error — update local record and show failure
+          try{ updateLocalSubmission(localId, { status: 'failed', meta: { error: (err && err.message) || 'send_failed' } }); }catch(e){}
           if(feedback) feedback.textContent = '❌ Send failed. Please try again or email victorericmoukouri@outlook.com';
         })
         .finally(function(){
-          if(submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit'; }
+            // only re-enable the button here if no cooldown is active
+            if(submitBtn) {
+              if(Date.now() >= (form._submitCooldown || 0)){
+                submitBtn.disabled = false; submitBtn.textContent = 'Submit';
+              } else {
+                submitBtn.textContent = 'Submit';
+              }
+            }
         });
     });
   }
@@ -160,31 +251,7 @@
   bindContact('footer-contact-form-3','contact-feedback-3');
   bindContact('contact-page-form','contact-page-feedback');
 
-  // Project modal with improved animations and keyboard support
-  var modal = document.getElementById('project-modal');
-  var modalBody = document.getElementById('modal-body');
-  var closeBtn = document.getElementById('modal-close');
-  function openModal(content){
-    if(!modal) return;
-    if(modalBody) modalBody.innerHTML = content;
-    modal.setAttribute('aria-hidden','false');
-    if(closeBtn) closeBtn.focus();
-  }
-  function closeModal(){
-    if(!modal) return;
-    modal.setAttribute('aria-hidden','true');
-  }
-  document.querySelectorAll('.view-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var id = btn.getAttribute('data-project') || '';
-      var title = btn.getAttribute('data-title') || ('Projet ' + id);
-      var content = '<h2>' + title + '</h2><p>Project overview, challenges, UX solutions and screenshots.</p>';
-      openModal(content);
-    });
-  });
-  if(closeBtn) closeBtn.addEventListener('click', closeModal);
-  if(modal) modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+  // Project modal removed: project links now navigate directly; modal behavior disabled.
 
   // IntersectionObserver for reveal animations
   try{
@@ -278,6 +345,9 @@
     // focus the close button for accessibility
     var btn = overlay.querySelector('.close-submit');
     if(btn) btn.focus();
+    // auto-close confirmation overlay after 3 seconds
+    if(window._submitAutoCloseTimer) clearTimeout(window._submitAutoCloseTimer);
+    window._submitAutoCloseTimer = setTimeout(function(){ closeSubmitConfirmation(); window._submitAutoCloseTimer = null; }, 3000);
   }
 
   function closeSubmitConfirmation(){
@@ -288,6 +358,14 @@
     setTimeout(function(){ if(overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay); },350);
   }
 
+  // ensure any auto-close timer is cleared when overlay is closed manually
+  var origCloseSubmitConfirmation = closeSubmitConfirmation;
+  closeSubmitConfirmation = function(){
+    if(window._submitAutoCloseTimer){ clearTimeout(window._submitAutoCloseTimer); window._submitAutoCloseTimer = null; }
+    origCloseSubmitConfirmation();
+  };
+
+  // Autoplay background music
   var musicToggle = document.getElementById('music-toggle');
   var bgMusic = document.getElementById('bg-music');
   var isPlaying = false;
