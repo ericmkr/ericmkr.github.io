@@ -57,6 +57,10 @@ Des projets choisis non pour leur quantité, mais pour ce qu’ils racontent :
 ### 📩 Contact
 Parce que le design est avant tout un **dialogue**.
 
+email : victorjoluke190701@gmail.com
+
+téléphone : +237 6 98 82 66 97
+
 ---
 
 ## 🧩 Projets mis en lumière
@@ -123,9 +127,6 @@ Victor Eric MOUKOURI
 UX/UI Designer & Front-end Developer
 Fondateur de la vision mkr
 
-Le design n’est pas une décoration.
-C’est une intention rendue visible.
-
 ---
 
 ## 📄 Licence
@@ -134,9 +135,3 @@ Projet personnel.
 Libre d’inspiration, protégé dans son identité.
 
 ---
-
-## 🔥 Ce README fait maintenant :
-
-- raconter **qui tu es**
-- expliquer **pourquoi tu design**
-- donner envie de **scroller**, pas seulement lire
