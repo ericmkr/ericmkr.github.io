@@ -741,7 +741,7 @@ footer textarea {
     cursor:pointer;
     font-size:0.9rem;
     /* smoother, slightly slower pulse and gentle motion */
-    animation:blink 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation:blink 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     will-change: opacity, transform;
     box-shadow:0 6px 20px rgba(255,107,157,0.35);
     transition:transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, opacity 0.25s ease;
