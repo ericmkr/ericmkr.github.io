@@ -33,6 +33,9 @@ d) Avoid overflows by setting `width: 100%` on images
 e) Use flexbox/grid for a natural, responsive layout
 */
 
+@import url(''); 
+/*https://fonts.googleapis.com/css?family=Amatic+SC|Montserrat:400,700|Seymour+One*/
+
 :root {
   --bg:#0f1724;
   --card:#0b1220;
@@ -82,7 +85,7 @@ body::before {
 }
 
 /* Ensure main structural sections appear above the overlay */
-.site-header, main, .site-footer {
+.header, main, .site-footer {
     position:relative;
     z-index:1;
 }
@@ -93,32 +96,32 @@ body::before {
     padding:1.25rem;
 }
 
-.site-header {
+.header {
     background:transparent;
     padding:.75rem 0;
 }
 
 /* Reduce left padding in header so logo sits closer to the viewport edge */
-.site-header .container {
+.header .container {
     padding-left:0;
     padding-right:1.25rem;
 }
 
-.header-inner {
+.header-left {
     display:flex;
     align-items:center;
     justify-content:space-between;
     
 }
 
-.brand {
+.logo {
     font-weight:700;
     color:var(--white);
     text-decoration:none;
     margin: left -1px; /* nudge the brand slightly left to sit nearer the edge */
 }
 
-.brand img {
+.blogo img {
     display: block;
     width: 111px;
     height: 111px;
@@ -855,12 +858,12 @@ footer textarea {
     }
     
     /* ========== ASTUCE: Adapter le layout flexbox de l'en-tête pour tablette ========== */
-    .header-inner {
+    .header-left {
         gap: 0.5rem; /* Réduit l'espace entre éléments */
     }
     
     /* ========== ASTUCE: Réduire l'image du logo légèrement pour tablette ========== */
-    .brand img {
+    .logo img {
         width: 95px; /* Réduit de 111px */
         height: 95px;
     }
@@ -966,7 +969,7 @@ footer textarea {
     }
     
     /* ========== ASTUCE: Adapter le header pour petit écran ========== */
-    .site-header .container {
+    .header .container {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
     }
