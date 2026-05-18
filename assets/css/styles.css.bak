@@ -1,1190 +1,179 @@
-/* ========================================
-   DOCUMENTATION: RESPONSIVE DESIGN & TABLET ADAPTATION
-   ======================================== 
-   
-   This CSS file contains a complete responsive strategy with 3 breakpoints:
-
-1. PC (default): 1400px - 1024px
-
-2. TABLET (max-width: 1024px): 1024px - 800px
-
-3. SMALL TABLET (max-width: 800px): less than 800px
-
-BASIC PRINCIPLES:
-
-- Mobile-First vs. Desktop-First: Here we use Desktop-First (PC styles by default, then progressively scale down)
-
-- Fluid vs. Rigid: Dimensions adapt progressively with media queries
-
-- Flexible Grid: Grids transition from 3 columns → 2 columns → 1 column
-
-- Adaptive Images: Images gradually reduce their dimensions
-
-KEY TIPS:
-
-a) Use max-width to apply styles up to a certain width
-
-b) Use rem/em instead of px for better Scalability
-
-c) Test on multiple devices (Chrome DevTools)
-
-d) Avoid overflows by setting `width: 100%` on images
-
-e) Use flexbox/grid for a natural, responsive layout
-*/
-
-@import url(''); 
-/*https://fonts.googleapis.com/css?family=Amatic+SC|Montserrat:400,700|Seymour+One*/
-
-:root {
-  --bg:#0f1724;
-  --card:#0b1220;
-  --muted:#a8b3c5;
-  --accent:#ffb347;
-  --accent-2:#ff7a59;
-  --white:#ffffff;
-  --max-width:1400px;
-}
-
+/* RESET */
 * {
-    box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Guarantee the background spans at least the full viewport height */
-html, body {
-    min-height: 100%;
+/* ROOT COLORS */
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #a8b3c5;
+  --accent: #ffb347;
+  --accent-2: #ff7a59;
+  --white: #ffffff;
 }
 
+/* BODY */
 body {
-    font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;
-    margin:0;
-    /* Background image for the whole site */
-    background-image: url("../img/Portfolio\ bg.jpg");
-    background-size: cover;
-    background-position: center top;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    color:var(--white);
-    line-height:1.5;
-    animation: slideBackground 15s ease-in-out infinite;
+  font-family: Arial, sans-serif;
+  background: #0f1724;
+  color: var(--white);
+  line-height: 1.5;
 }
 
-@keyframes slideBackground {
-    0%, 100% { background-position: center; }
-    50% { background-position: calc(center + 20px) calc(center + 20px); }
-}
-
-/* Dark overlay to keep text readable; uses a pseudo element so the image stays visible */
-body::before {
-    content: "";
-    position:fixed;
-    inset:0;
-    background: rgba(0,0,0,0.65); /* adjust alpha for more/less transparency */
-    pointer-events:none;
-    z-index:0;
-}
-
-/* Ensure main structural sections appear above the overlay */
-.header, main, .site-footer {
-    position:relative;
-    z-index:1;
-}
-
+/* CONTAINER */
 .container {
-    max-width:var(--max-width);
-    margin:0 auto;
-    padding:1.25rem;
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
 }
 
+/* HEADER */
 .header {
-    background:transparent;
-    padding:.75rem 0;
-}
-
-/* Reduce left padding in header so logo sits closer to the viewport edge */
-.header .container {
-    padding-left:0;
-    padding-right:1.25rem;
+  background: transparent;
 }
 
 .header-left {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo {
-    font-weight:700;
-    color:var(--white);
-    text-decoration:none;
-    margin: left -1px; /* nudge the brand slightly left to sit nearer the edge */
+/* LOGO */
+.logo img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.blogo img {
-    display: block;
-    width: 111px;
-    height: 111px;
-    object-fit:cover;
-    border-radius:11px;
-}
-
-/* Header right group (nav + CTA) */
+/* HEADER RIGHT */
 .header-right {
-    display:flex;
-    align-items:center;
-    gap:0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.header-cta {
-    display:inline-block;
-    padding:.4rem .7rem;
-    border-radius:8px;
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    color:#111;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.btn.small {
-    padding:.35rem .6rem;
-    border-radius:6px;
-    font-size:0.95rem;
-}
-
+/* NAVBAR */
 .main-nav {
-    background:rgba(0,0,0,0.3);
-    padding:0.7rem 1rem;
-    border-radius:12px;
-    border:1px solid rgba(255,179,71,0.2);
-    backdrop-filter:blur(3px); /* 'backdrop-filter' is not supported by Safari, Safari on iOS. Add '-webkit-backdrop-filter' to support Safari 9+, Safari on iOS 9+.*/
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 10px;
 }
 
-/* When nav is active (open), apply visible state */
-.main-nav, .nav-active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+/* FIX: NAVBAR SHOULD BE VISIBLE */
+.main-nav {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-.main-nav ul {
-    list-style:none;
-    margin:0;
-    padding:0;
-    display:flex;
-    gap:0;
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  gap: 20px;
 }
 
-.main-nav li {
-    position:relative;
+.navbar-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 5px 10px;
 }
 
-.main-nav li:not(:last-child)::after {
-    content:"";
-    position:absolute;
-    right:0;
-    top:50%;
-    transform:translateY(-50%);
-    height:20px;
-    width:1px;
-    background:rgba(255,179,71,0.3);
+.navbar-nav a:hover {
+  color: var(--accent);
 }
 
-.main-nav a {
-    color:var(--muted);
-    text-decoration:none;
-    padding:0.5rem 1rem;
-    display:block;
-    transition:all 0.3s ease;
-    position:relative;
+/* BUTTON */
+.btn-timing {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.main-nav a:hover {
-    color:var(--accent);
-    background:rgba(255,179,71,0.1);
-    border-radius:8px;
-}
-
-/* Active navigation link (current page) */
-.main-nav a.nav-active {
-    color:var(--accent);
-    background:rgba(255,179,71,0.15);
-    border-radius:8px;
-    font-weight:600;
-}
-
-.nav-toggle {
-    display:none !important;
-    position:fixed;
-    top:1rem;
-    right:1rem;
-    z-index:1001;
-    background:transparent;
-    border:none;
-    padding:0;
-    width:44px;
-    height:44px;
-    cursor:pointer;
-    -webkit-tap-highlight-color:transparent;
-}
-
-.nav-toggle::before, .nav-toggle::after {
-    content:'';
-    display:block;
-    position:absolute;
-    width:24px;
-    height:2px;
-    background:var(--text);
-    left:10px;
-    transition:transform 0.3s ease, opacity 0.3s ease;
-}
-
-.nav-toggle::before {
-    top:12px;
-}
-
-.nav-toggle::after {
-    bottom:12px;
-}
-
-/* Middle line (created with box-shadow) */
-.nav-toggle {
-    box-shadow:inset 0 10px 0 0 var(--text);
-    transition:box-shadow 0.3s ease;
-}
-
-.nav-toggle[aria-expanded="true"] {
-    box-shadow:none;
-}
-
-/* Top line rotation */
-.nav-toggle[aria-expanded="true"]::before {
-    transform:translateY(10px) rotate(45deg);
-}
-
-/* Bottom line rotation */
-.nav-toggle[aria-expanded="true"]::after {
-    transform:translateY(-10px) rotate(-45deg);
-}
-
-.nav-toggle:hover {
-    opacity:0.8;
-}
-
+/* HERO */
 .hero {
-    padding:2rem 0;
-    text-align:center;
+  text-align: center;
+  padding: 50px 0;
 }
 
-.hero, .lead {
-    color:var(--muted);
-    max-width:42rem;
-    margin:0 auto 0.6rem;
-}
-
-/* Cartoon-style heading with playful typography */
-h1 {
-    font-family:'Fredoka', sans-serif;
-    font-size:2.6rem;
-    font-weight:700;
-    letter-spacing:0.05em;
-    color:var(--white);
-    text-shadow:3px 3px 0px rgba(255,179,71,0.6), 6px 6px 0px rgba(0,0,0,0.3);
-    margin:0 0 0.6rem 0;
-}
-
-/* Center h1 and the immediately following paragraph */
-h1, h1 + p {
-    text-align: center;
-}
-
-/* Center paragraphs within main (for about.html and similar pages) */
-main p {
-    text-align: center;
-}
-
-/* Center all second-level headings */
-h2 {
-    text-align: center;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-/* Hero image: crop, center and optimized for PC */
 .hero-img {
-    /*
-    ASTUCE RESPONSIVE: object-fit et object-position permettent de contrôler 
-    comment l'image se redimensionne
-    - object-fit: cover = l'image remplit tout l'espace sans distortion
-    - object-position: center = garde le centre de l'image visible
-    
-    ASTUCE: Les dimensions (320x320px) seront réduites progressivement en media query:
-    - Tablette: 320x320px (même taille)
-    - Petite tablette: 280x280px (réduction de 12%)
-    - Mobile: 200x200px (réduction supplémentaire de 28%)
-    */
-    display:block;
-    width: 320px;
-    height:320px;
-    margin:0 auto 0.9rem;
-    object-fit:cover;
-    object-position:center;
-    border-radius:8px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.4);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
 }
 
-/* Scroll / reveal animations */
-.animate-fade {
-    opacity:0;
-    transform:translateY(18px);
-    transition:opacity 600ms cubic-bezier(.22,.9,.36,1), transform 600ms cubic-bezier(.22,.9,.36,1);
-    will-change: opacity, transform;
+/* HEADINGS */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-.animate-fade.in-view {
-    opacity:1;
-    transform:translateY(0);
+h2 {
+  text-align: center;
+  margin: 30px 0;
 }
 
-/* Parallax container hint */
-.parallax {
-    transform:translateY(0);
-    will-change:transform;
-}
-
-/* Elegant CTA buttons */
-.btn {
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:#111;
-    padding:.7rem 1.3rem;
-    border-radius:12px;
-    border:none;
-    text-decoration:none;
-    cursor:pointer;
-    font-weight:600;
-    font-size:1rem;
-    transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow:0 6px 20px rgba(255,179,71,0.25);
-    display:inline-block;
-    position:relative;
-    overflow:hidden;
-}
-
-.btn::before {
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(135deg,rgba(255,255,255,0.2),transparent);
-    opacity:0;
-    transition:opacity 0.3s ease;
-}
-
-.btn:hover {
-    transform:translateY(-3px);
-    box-shadow:0 12px 30px rgba(255,179,71,0.35);
-}
-
-.btn:hover::before {
-    opacity:1;
-}
-
-.btn.small {
-    padding:.5rem .9rem;
-    font-size:0.9rem;
-    border-radius:10px;
-}
-
-.back-to-top {
-    position:fixed;
-    right:1.15rem;
-    bottom:1.15rem;
-    width:46px;
-    height:46px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border:none;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:#111;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 10px 28px rgba(0,0,0,0.35);
-    opacity:0;
-    transform:translateY(12px);
-    transition:opacity 0.25s ease, transform 0.25s ease;
-    z-index:1400;
-    pointer-events:none;
-}
-
-.back-to-top.show {
-    opacity:1;
-    transform:translateY(0);
-    pointer-events:auto;
-}
-
-.back-to-top:focus-visible {
-    outline:2px solid var(--accent);
-    outline-offset:3px;
-}
-
+/* GRID */
 .grid {
-    /* 
-    ASTUCE RESPONSIVE: grid-template-columns avec repeat() permet une adaptation facile
-    - repeat(3, 1fr) = 3 colonnes égales (1fr = 1 fraction unit = 33.33% chacune)
-    - Cette valeur sera modifiée en media query pour tablette: repeat(2, 1fr)
-    - Puis en petite tablette: 1fr (une seule colonne)
-    */
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:2rem; /* Espace entre les éléments */
-    margin-top:2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
 }
 
-.card-link {
-    display:block;
-    text-decoration:none;
-    color:inherit;
-    height:100%;
-}
-
+/* CARD */
 .card {
-    background:rgba(255,255,255,0.03);
-    padding:1rem;
-    border-radius:10px;
-    transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);
-    cursor:pointer;
-    height:100%;
-    display:flex;
-    flex-direction:column;
-}
-
-.card:hover {
-    background:rgba(255,255,255,0.08);
-    transform:translateY(-6px);
-    box-shadow:0 12px 30px rgba(255,179,71,0.2);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .card img {
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:6px;
-    transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
-.card:hover img {
-    transform:scale(1.05);
-}
-
-.card h3 {
-    color:var(--accent);
-    transition:color 0.35s ease;
-}
-
-.card:hover h3 {
-    color:var(--accent-2);
-}
-
-.about-preview {
-    padding:2rem;
-    text-align:center;
-    margin:2rem 0;
-}
-
-.about-preview h2 {
-    margin-bottom:1.5rem;
-}
-
-.about-content {
-    max-width:600px;
-    margin:0 auto;
-}
-
-.about-content p {
-    font-size:1rem;
-    line-height:1.6;
-    margin-bottom:1rem;
-    color:var(--muted);
-}
-
-.about-highlights {
-    list-style: none;
-    padding:0;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:1rem;
-    margin:1.5rem 0;
-}
-
-.about-highlights li {
-    background:rgba(255,179,71,0.1);
-    color:var(--accent);
-    border:1px solid rgba(255,179,71,0.3);
-    border-radius:6px;
-    font-size:0.9rem;
-    padding:0.5rem 1rem;
-    display:inline-block;
-}
-
-.about-preview a {
-    color:var(--accent-2);
-    text-decoration:none;
-    font-weight:600;
-}
-
-.about-preview a:hover {
-    text-decoration:underline;
-}
- 
+/* FOOTER */
 .site-footer {
-    background:rgba(0,0,0,0.25);
-    padding:1rem 0;
-    margin-top:2rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  text-align: center;
 }
 
-.footer-inner {
-    display:flex;
-    flex-wrap:wrap;
-    gap:1rem;
-    align-items:flex-start;
-    justify-content:center;
-}
-
-.footer-contact {
-    min-width:260px;
-    max-width:400px;
-    text-align:center;
-}
-
-footer label {
-    display:block;
-    font-size:.85rem;
-    margin-top:.5rem;
-}
-
-footer input, footer textarea {
-    width:100%;
-    padding:.5rem;
-    border-radius:6px;
-    border:1px solid rgba(0,0,0,0.2);
-    background:#ffffff;
-    color:#222222;
-    font-family:inherit;
-    transition:border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-footer input:focus, footer textarea:focus {
-    outline:none;
-    border-color:var(--accent);
-    box-shadow:0 0 8px rgba(255,179,71,0.3);
-}
-
-footer input::placeholder, footer textarea::placeholder {
-    color:#888888;
-}
-
+footer input,
 footer textarea {
-    margin-bottom:0.8rem;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
 }
 
-.feedback {
-    margin-top:.5rem;
-    color:var(--accent);
+footer button {
+  margin-top: 10px;
 }
 
-.portfolio-grid {
-    /* 
-    ASTUCE RESPONSIVE: Même logique que .grid
-    - Commence avec 3 colonnes sur PC
-    - Passe à 2 colonnes en tablette (max-width: 1024px)
-    - Passe à 1 colonne en petite tablette (max-width: 800px)
-    - Cela maximise l'utilisation de l'espace à chaque taille d'écran
-    */
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:2rem;
-}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .header-left {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.project {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding:1.1rem;
-    border-radius:10px;
-    border: 1px solid rgba(255,255,255,0.04);
-    box-shadow: 0 6px 18px rgba(3,6,14,0.35);
-    display:flex;
-    flex-direction:column;
-    gap:0.85rem;
-    transition: transform 220ms cubic-bezier(.22,1,.36,1), box-shadow 220ms ease;
-}
-
-.project:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 36px rgba(3,6,14,0.45);
-}
-
-.project img {
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
-.view-btn {
-    margin-top:.5rem;
-    background:transparent;
-    border:1px solid var(--accent);
-    color:var(--accent);
-    padding:.4rem .6rem;
-    border-radius:6px;
-    cursor:pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Ensure link-like buttons don't show underline on hover/focus and center inside project cards */
-.view-btn:hover,
-.view-btn:focus {
-    text-decoration: none;
-}
-
-.project .view-btn {
-    align-self: center;
-}
-
-/* project modal removed (no longer used) */
-
-/* Submit confirmation overlay + modal */
-.submit-overlay {
-    position:fixed;
-    inset:0;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    background:rgba(0,0,0,0.6);
-    z-index:12000;
-}
-
-.submit-overlay[aria-hidden="false"] {
-    display:flex;
-}
-
-.submit-modal {
-    background:var(--card);
-    color:var(--white);
-    padding:1.25rem 1.5rem;
-    border-radius:12px;
-    max-width:420px;
-    width:90%;
-    text-align:center;
-    box-shadow:0 12px 40px rgba(0,0,0,0.6);
-    transform:translateY(8px) scale(0.98);
-    opacity:0;
-    transition:transform 260ms cubic-bezier(.2,.9,.3,1), opacity 260ms ease;
-}
-
-.submit-overlay[aria-hidden="false"] .submit-modal {
-    transform:translateY(0) scale(1);
-    opacity:1;
-}
-
-.submit-modal h3 { 
-    margin-top:0;
-    color:var(--accent); 
-}
-
-.submit-modal p { 
-    color:var(--muted); 
-    margin:.5rem 0 1rem; 
-}
-
-.submit-modal .close-submit { 
-    display:inline-block;
-    padding:.5rem .9rem; 
-    border-radius:8px; 
-    background:linear-gradient(135deg,var(--accent),var(--accent-2)); 
-    color:#111; 
-    border:0; 
-    cursor:pointer; 
-    font-weight:600; 
-}
-
-/* Blinking Timing button (smooth pulse) */
-@keyframes blink {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 0.35;
-        transform: translateY(-2px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.btn-timing {
-    display:inline-block;
-    padding:.4rem .7rem;
-    border-radius:8px;
-    background:linear-gradient(135deg,#ff6b9d,#c06c84);
-    color:#ffffff;
-    text-decoration:none;
-    font-weight:600;
-    border:none;
-    cursor:pointer;
-    font-size:0.9rem;
-    /* smoother, slightly slower pulse and gentle motion */
-    animation:blink 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    will-change: opacity, transform;
-    box-shadow:0 6px 20px rgba(255,107,157,0.35);
-    transition:transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, opacity 0.25s ease;
-}
-
-.btn-timing:hover {
-    /* pause the animation on hover for a steady visible state */
-    animation-play-state: paused;
-    opacity:1 !important;
-    transform:translateY(-3px);
-    box-shadow:0 12px 30px rgba(255,107,157,0.5);
-}
-
-.music-toggle {
-    position: fixed;
-    bottom: 5rem;
-    right: 1.15rem;
-    width: 46px;
-    height: 46px;
-    border: none;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    font-size: 1.4rem;
-    cursor: pointer;
-    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
-    z-index: 1400;
-    transition: transform 0.3s ease;
-}
-
-.music-toggle:hover {
-    transform: scale(1.1);
-}
-
-/* ========================================
-   MEDIA QUERIES TABLETTE (768px - 1024px)
-   ======================================== 
-   
-   TECHNIQUE: Les media queries utilisent @media pour appliquer des styles
-   conditionnels selon la largeur de l'écran. On cible les tablettes entre 
-   768px et 1024px de largeur.
-   
-   ASTUCE 1: max-width pour cibler les écrans JUSQU'À une largeur donnée
-   ASTUCE 2: min-width pour cibler les écrans À PARTIR d'une largeur donnée
-   ASTUCE 3: Utiliser des proportions plutôt que des pixels fixes pour plus
-             de flexibilité et d'adaptation
-   ASTUCE 4: Réduire progressivement les éléments sans les supprimer complètement
-*/
-
-@media (max-width: 1024px) {
-    /* ========== ASTUCE: Augmenter le padding pour mieux utiliser l'espace tablette ========== */
-    .container {
-        padding: 1.5rem;
-    }
-    
-    /* ========== ASTUCE: Réduire la largeur max pour laisser des marges visibles ========== */
-    :root {
-        --max-width: 1000px;
-    }
-    
-    /* ========== ASTUCE: Adapter le titre principal à la taille écran tablette ========== */
-    h1 {
-        font-size: 2.4rem; /* Réduit de 3rem (-20%) */
-        text-shadow: 2px 2px 0px rgba(255,179,71,0.6), 4px 4px 0px rgba(0,0,0,0.3);
-        letter-spacing: 0.03em;
-        margin: 0 0 0.6rem 0;  /* Réduit de 0.8rem */
-    }
-    
-    /* ========== ASTUCE: Adapter l'image hero pour tablette (pas d'excès de hauteur) ========== */
-    .hero-img {
-        width: 320px;  /* Réduit de 400px (-20%) */
-        height: 320px;
-        margin: 0 auto 0.6rem;  /* Réduit de 0.8rem */
-    }
-    
-    /* ========== ASTUCE: Adapter l'espace entre les colonnes (gap) ========== 
-       Le gap réduit progressivement:
-       - PC: 2rem (32px) - plus d'espace entre colonnes sur grand écran
-       - Tablette: 1.5rem (24px) - espace intermédiaire
-       - Petite tablette: gap normal car une colonne = pas de gap horizontal
-    */
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        margin-top: 1.5rem;
-    }
-    
-    /* ========== ASTUCE: Réduire la hauteur des images dans les cartes ========== */
-    .card img {
-        height: 200px; /* Réduit de 220px */
-    }
-    
-    /* ========== ASTUCE: Réduire le padding des cartes pour économiser l'espace ========== */
-    .card {
-        padding: 0.8rem;
-    }
-    
-    /* ========== ASTUCE: Réduire l'espace entre les sections ========== */
-    .hero {
-        padding: 3rem 0; /* Réduit de 4rem */
-    }
-    
-    /* ========== ASTUCE: Adapter le portfolio grid à 2 colonnes aussi ========== */
-    .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    
-    /* ========== ASTUCE: Réduire la hauteur des images projet ========== */
-    .project img {
-        height: 240px; /* Réduit de 280px */
-    }
-    
-    /* ========== ASTUCE: Adapter le layout flexbox de l'en-tête pour tablette ========== */
-    .header-left {
-        gap: 0.5rem; /* Réduit l'espace entre éléments */
-    }
-    
-    /* ========== ASTUCE: Réduire l'image du logo légèrement pour tablette ========== */
-    .logo img {
-        width: 95px; /* Réduit de 111px */
-        height: 95px;
-    }
-    
-    /* ========== ASTUCE: Adapter la police du bouton timing ========== */
-    .btn-timing {
-        padding: 0.35rem 0.6rem;
-        font-size: 0.8rem;
-    }
-    
-    /* project modal removed (no longer used) */
-    
-    /* ========== ASTUCE: Adapter la section about-preview pour tablette ========== */
-    .about-preview {
-        padding:1.5rem;
-    }
-    
-    .about-highlights li {
-        padding:0.4rem 0.8rem;
-        font-size:0.85rem;
-    }
-    
-    /* ========== ASTUCE: Réduire le padding du footer ========== */
-    .site-footer {
-        padding: 0.8rem 0; /* Réduit de 1rem 0 */
-    }
-    
-    /* ========== ASTUCE: Adapter la largeur du conteneur footer ========== */
-    .footer-contact {
-        min-width: 220px;
-        max-width: 350px;
-    }
-}
-
-/* ========================================
-   MEDIA QUERIES TABLETTE PETITE (768px - 800px)
-   ======================================== 
-   ASTUCE: Créer une 2e media query pour les petites tablettes afin d'affiner 
-   encore plus l'adaptation. C'est comme avoir des breakpoints multiples.
-*/
-
-@media (max-width: 800px) {
-    /* ========== ASTUCE: Passer à 1 colonne pour les très petits écrans tablette ========== */
-    .grid {
-        grid-template-columns: 1fr; /* Une seule colonne pour utiliser toute la largeur */
-    }
-    
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* ========== ASTUCE: Adapter les dimensions des images hero pour petit écran ========== */
-    .hero-img {
-        width: 280px;  /* Réduit de 350px (-20%) */
-        height: 280px;
-        margin: 0 auto 0.5rem;
-    }
-    
-    /* ========== ASTUCE: Réduire la police du titre pour petit écran tablette ========== */
-    h1 {
-        font-size: 1.9rem;  /* Réduit de 2.4rem (-21%) */
-        text-shadow: 1px 1px 0px rgba(255,179,71,0.6), 3px 3px 0px rgba(0,0,0,0.3);
-        margin: 0 0 0.4rem 0;
-    }
-    
-    /* ========== ASTUCE: Réduire le padding général pour petit écran ========== */
-    .container {
-        padding: 1rem;
-    }
-}
-
-/* ========================================
-   MEDIA QUERIES MOBILE (≤480px)
-   ======================================== 
-   
-   TECHNIQUE: Breakpoint pour mobiles (smartphones)
-   S'applique à tous les écrans jusqu'à 480px de largeur
-   
-   ASTUCE 1: Les mobiles ont l'écran très étroit = optimisation l'espace vertical
-   ASTUCE 2: Réduire drastiquement les dimensions (images petites, texte compact)
-   ASTUCE 3: Augmenter la taille des boutons pour tactile (min 44×44px)
-   ASTUCE 4: Masquer les éléments secondaires si nécessaire
-   ASTUCE 5: Utiliser des marges minimales pour maximiser le contenu
-*/
-
-@media (max-width: 480px) {
-    /* ========== ASTUCE: Réduire drastiquement la largeur max pour mobile ========== */
-    :root {
-        --max-width: 100%;
-    }
-
-    /* Assurer que le fond couvre bien tout l'écran mobile (fix pour iOS) */
-    body {
-        min-height: 100vh;
-        background-size: cover;
-        background-position: center top;
-        background-attachment: scroll;
-    }
-    
-    /* ========== ASTUCE: Réduire le padding container pour maximiser contenu ========== */
-    .container {
-        padding: 0.75rem;
-    }
-    
-    /* ========== ASTUCE: Adapter le header pour petit écran ========== */
-    .header .container {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-    
-    /* ========== ASTUCE: Réduire logo mobile pour économiser espace horizontal ========== */
-    .brand img {
-        width: 70px;      /* Réduit de 95px (-26%) */
-        height: 70px;
-    }
-    
-    /* ========== ASTUCE: Adapter la navigation mobile (overlay fullscreen) ========== */
-    .main-nav {
-        display:block;
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:linear-gradient(135deg, rgba(0,0,0,0.95), rgba(40,40,60,0.95));
-        padding:5rem 1rem 2rem;
-        border-radius:0;
-        border:none;
-        -webkit-backdrop-filter:blur(10px);
-        backdrop-filter:blur(10px);
-        z-index:1000;
-        overflow-y:auto;
-    }
-
-    .main-nav ul {
-        flex-direction:column;
-        gap:0;
-    }
-
-    .main-nav li {
-        margin-bottom:0;
-    }
-
-    .main-nav a {
-        display:block;
-        padding:1rem;
-        font-size:1.1rem;
-        border-radius:8px;
-        margin-bottom:0.5rem;
-    }
-
-    .main-nav li:not(:last-child)::after {
-        display:none;
-    }
-    
-    /* ========== ASTUCE: Afficher le bouton menu pour mobile ========== */
-    .nav-toggle {
-        display:inline-block !important;
-    }
-    
-    /* ========== ASTUCE: Réduire espace header ========== */
-    .header-right {
-        gap: 0.3rem;
-    }
-    
-    /* ========== ASTUCE: Titre ultra-compact pour mobile ========== */
-    h1 {
-        font-size: 1.6rem;  /* Réduit de 2.2rem (-27%) */
-        text-shadow: 1px 1px 0px rgba(255,179,71,0.4), 2px 2px 0px rgba(0,0,0,0.2);
-        letter-spacing: 0.01em;
-        margin: 0 0 0.25rem 0;  /* Réduit de 0.5rem */
-        line-height: 1.1;
-    }
-    
-    /* ========== ASTUCE: Réduire padding section hero pour mobile ========== */
-    .hero {
-        padding: 0.75rem 0;  /* Réduit de 3rem → 0.75rem pour compacité */
-    }
-    
-    /* ========== ASTUCE: Image hero réduite pour afficher tous éléments au-dessus du pli ========== */
-    .hero-img {
-        width: 200px;      /* Réduit de 350px (-43%) pour laisser place au contenu */
-        height: 200px;
-        margin: 0 auto 0.4rem;
-        border-radius: 6px;
-    }
-    
-    /* ========== ASTUCE: Réduire la taille du lead text et espacement ========== */
-    .hero, .lead {
-        font-size: 0.85rem;
-        max-width: 100%;
-        margin: 0 auto 0.5rem;  /* Réduit de 0.75rem */
-        line-height: 1.3;
-    }
-    
-    /* ========== ASTUCE: Réduire bouton pour mobile (mais reste cliquable ≥44px) ========== */
-    .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-        border-radius: 8px;
-        min-height: 44px;
-    }
-    
-    /* ========== ASTUCE: Grille mobile = 1 colonne ========== */
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-    
-    /* ========== ASTUCE: Réduire images cartes pour mobile ========== */
-    .card img {
-        height: 180px;  /* Réduit de 200px */
-    }
-    
-    /* ========== ASTUCE: Réduire padding cartes ========== */
-    .card {
-        padding: 0.6rem;
-    }
-    
-    /* ========== ASTUCE: Réduire police carte pour compact ========== */
-    .card h3 {
-        font-size: 0.95rem;
-    }
-    
-    /* ========== ASTUCE: Portfolio grid mobile ========== */
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-        gap: 0.8rem;
-    }
-    
-    /* ========== ASTUCE: Réduire images projets mobile ========== */
-    .project img {
-        height: 220px;  /* Réduit de 240px */
-    }
-    
-    /* ========== ASTUCE: Réduire padding projet ========== */
-    .project {
-        padding: 0.6rem;
-    }
-    
-    /* ========== ASTUCE: Adapter about-preview pour mobile ========== */
-    .about-preview {
-        padding:1rem;
-    }
-    
-    .about-content p {
-        font-size:0.9rem;
-        margin-bottom:0.8rem;
-    }
-    
-    .about-highlights {
-        gap:0.6rem;
-    }
-    
-    .about-highlights li {
-        padding:0.35rem 0.7rem;
-        font-size:0.8rem;
-    }
-    
-    /* ========== ASTUCE: Footer responsive mobile ========== */
-    .site-footer {
-        padding: 0.5rem 0;
-    }
-    
-    /* ========== ASTUCE: Layout footer mobile ========== */
-    .footer-inner {
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-    
-    /* ========== ASTUCE: Contact form mobile ========== */
-    .footer-contact {
-        min-width: 100%;
-        max-width: 100%;
-        width: 100%;
-    }
-    
-    /* ========== ASTUCE: Inputs form mobile ========== */
-    footer input, footer textarea {
-        padding: 0.4rem;
-        font-size: 0.9rem;
-    }
-    
-    /* ========== ASTUCE: Bouton timing mobile ========== */
-    .btn-timing {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.75rem;
-    }
-    
-    /* project modal removed (no longer used) */
-    
-    /* ========== ASTUCE: Submit modal mobile ========== */
-    .submit-modal {
-        width: 90%;
-        padding: 1rem 1.2rem;
-        border-radius: 10px;
-    }
-    
-    /* ========== ASTUCE: Réduire h2 pour mobile ========== */
-    h2 {
-        font-size: 1.5rem;
-    }
-    
-    /* ========== ASTUCE: Section padding mobile minimal ========== */
-    .featured {
-        padding: 1rem 0;
-    }
-}
-
-/* Center content for Skills section */
-.skills ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0.6rem 0 1rem 0;
-    display: flex;
+  .navbar-nav {
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: .45rem;
-}
-.skills li {
-    max-width: 56rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
