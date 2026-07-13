@@ -1,102 +1,93 @@
-// Simple interactions: nav toggle, year, contact form handling, modal
-(function(){
-  // year
-  var y = new Date().getFullYear();
-  ["year","year-2","year-3","year-4"].forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.textContent = y;
-  });
+/**
+ * ==========================================
+ * CLOCK.JS
+ * Affichage de l'horloge
+ * ==========================================
+ */
 
-  // Set active navigation link based on current page
-  function setActiveNavLink(){
-    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    if(currentPage === '' || currentPage === '/') currentPage = 'index.html';
-    
-    var navLinks = document.querySelectorAll('.main-nav a');
-    navLinks.forEach(function(link){
-      var href = link.getAttribute('href');
-      // Remove .nav-active from all links
-      link.classList.remove('nav-active');
-      
-      // Check if link matches current page
-      if(href === currentPage || 
-         (currentPage === 'index.html' && (href === '/' || href === 'index.html')) ||
-         (href === '#contact' && currentPage === 'index.html')) {
-        link.classList.add('nav-active');
-      }
-    });
-  }
-  setActiveNavLink();
+function updateClock() {
 
-  // nav toggle - Enhanced with smooth animations and link closing
-  var navToggles = document.querySelectorAll('.nav-toggle');
-  var mainNav = document.querySelector('.main-nav');
-  
-  function closeNav() {
-    if (navToggles.length > 0) {
-      navToggles.forEach(function(btn) {
-        btn.setAttribute('aria-expanded', 'false');
-      });
-    }
-    if (mainNav) {
-      mainNav.style.display = 'none';
-      mainNav.classList.remove('nav-active');
-    }
-  }
-  
-  function toggleNav() {
-    if (!mainNav) return;
-    var isOpen = mainNav.style.display === 'block';
-    
-    navToggles.forEach(function(btn) {
-      btn.setAttribute('aria-expanded', (!isOpen).toString());
-    });
-    
-    if (isOpen) {
-      mainNav.classList.remove('nav-active');
-      setTimeout(function() {
-        mainNav.style.display = 'none';
-      }, 300);
-    } else {
-      mainNav.style.display = 'block';
-      setTimeout(function() {
-        mainNav.classList.add('nav-active');
-      }, 10);
-    }
-  }
-  
-  // Toggle button click
-  navToggles.forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      toggleNav();
-    });
-  });
-  
-  // Close menu when clicking on a link
-  if (mainNav) {
-    var navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(function(link) {
-      link.addEventListener('click', function() {
-        closeNav();
-      });
-    });
-  }
-  
-  // Close menu when clicking outside
-  document.addEventListener('click', function(e) {
-    if (mainNav && mainNav.style.display === 'block') {
-      if (!mainNav.contains(e.target) && !e.target.closest('.nav-toggle')) {
-        closeNav();
-      }
-    }
-  });
+  const now = new Date();
 
-  // footer contact forms - validation + real submit via FormSubmit (sends to Outlook)
-  var CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/victorericmoukouri@outlook.com';
+  // Heure
+  const hours = String(now.getHours()).padStart(2, "0");
+
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+
+  // Date
+  const dateOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  };
+
+  // Injection HTML
+  document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
+  
+  document.getElementById("date").textContent = now.toLocaleDateString("fr-FR", dateOptions);
+}
+
+// lancement immédiat
+updateClock();
+
+// update chaque seconde
+setInterval(updateClock, 1000);
+
+
+
+// ===== DAYTIME WITH ICONS =====
+
+// function getDayPeriod(hour){
+
+//   if(hour >= 5 && hour < 12){
+//     return "morning";
+//   }
+
+//   if(hour >= 12 && hour < 18){
+//     return "afternoon";
+//   }
+
+//   if(hour >= 18 && hour < 21){
+//     return "evening";
+//   }
+
+//   return "night";
+// }
+
+
+
+
+
+
+
+
+// ===== TOP PAGE WHEN RELOADING =====
+
+// window.addEventListener('load', () => {
+
+//   window.scrollTo({
+//     top: 0,
+//     left: 0,
+//     behavior: 'smooth'
+//   });
+
+// });
+
+
+
+
+
+
+
+// ===== FORM SUBNISSION =====
+
+var CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/victorericmoukouri@outlook.com';
 
   function sendContact(data){
-    return fetch(CONTACT_ENDPOINT, {
+    return fetch(CONTACT_ENDPOINT, {      /* Get data folder */
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,11 +106,6 @@
     });
   }
 
-  /*
-   * Local storage helpers
-   * - store submissions locally so you can access them later
-   * - structure: array of { id, formId, name, email, message, createdAt, status, meta }
-   */
   function _loadLocalSubmissions(){
     try{ return JSON.parse(localStorage.getItem('portfolio_submissions')||'[]'); }catch(e){ return []; }
   }
@@ -128,8 +114,7 @@
     try{ localStorage.setItem('portfolio_submissions', JSON.stringify(arr)); }catch(e){ /* Storage might be full or disabled */ }
   }
 
-  // Save a new submission locally and return its local id
-  function saveSubmissionLocally(formId, payload){
+  function saveSubmissionLocally(formId, payload){      /* Saves a local copy to avoid loss while disconnected */
     var store = _loadLocalSubmissions();
     var entry = {
       id: 's_' + Date.now() + '_' + Math.floor(Math.random()*10000),
@@ -146,7 +131,6 @@
     return entry.id;
   }
 
-  // Update a previously saved submission's status/meta by id
   function updateLocalSubmission(id, updates){
     var store = _loadLocalSubmissions();
     var found = false;
@@ -161,8 +145,7 @@
     return found;
   }
 
-  // Expose a simple accessor on window for quick retrieval in the console
-  window.getStoredSubmissions = function(){ return _loadLocalSubmissions(); };
+   window.getStoredSubmissions = function(){ return _loadLocalSubmissions(); };
 
   function bindContact(idForm,idFeedback){
     var form = document.getElementById(idForm);
@@ -172,7 +155,7 @@
 
     // cooldown timestamp (ms) for this form id to avoid rapid resubmits
     // stored on the form element to keep scope simple
-    if(!form._submitCooldown) form._submitCooldown = 0;
+    if(!form._submitCooldown) form._submitCooldown = 11000; // 0 as old
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
@@ -188,7 +171,8 @@
       
       // Email validation regex
       var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      
+
+      // Verifications
       if(!name){ if(feedback) feedback.textContent = '❌ Please enter your name.'; return; }
       if(!email){ if(feedback) feedback.textContent = '❌ Please enter an email address.'; return; }
       if(!emailRegex.test(email)){ if(feedback) feedback.textContent = '❌ Invalid email address (example: user@domain.com).'; return; }
@@ -365,26 +349,183 @@
     origCloseSubmitConfirmation();
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Simple interactions: nav toggle, year, contact form handling, modal
+// (function(){
+//   // year
+//   var y = new Date().getFullYear();
+//   ["year","year-2","year-3","year-4"].forEach(function(id){
+//     var el = document.getElementById(id);
+//     if(el) el.textContent = y;
+//   });
+
+//   // Set active navigation link based on current page
+//   function setActiveNavLink(){
+//     var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+//     if(currentPage === '' || currentPage === '/') currentPage = 'index.html';
+    
+//     var navLinks = document.querySelectorAll('.main-nav a');
+//     navLinks.forEach(function(link){
+//       var href = link.getAttribute('href');
+//       // Remove .nav-active from all links
+//       link.classList.remove('nav-active');
+      
+//       // Check if link matches current page
+//       if(href === currentPage || 
+//          (currentPage === 'index.html' && (href === '/' || href === 'index.html')) ||
+//          (href === '#contact' && currentPage === 'index.html')) {
+//         link.classList.add('nav-active');
+//       }
+//     });
+//   }
+//   setActiveNavLink();
+
+//   // nav toggle - Enhanced with smooth animations and link closing
+//   var navToggles = document.querySelectorAll('.nav-toggle');
+//   var mainNav = document.querySelector('.main-nav');
+  
+//   function closeNav() {
+//     if (navToggles.length > 0) {
+//       navToggles.forEach(function(btn) {
+//         btn.setAttribute('aria-expanded', 'false');
+//       });
+//     }
+//     if (mainNav) {
+//       mainNav.style.display = 'none';
+//       mainNav.classList.remove('nav-active');
+//     }
+//   }
+  
+//   function toggleNav() {
+//     if (!mainNav) return;
+//     var isOpen = mainNav.style.display === 'block';
+    
+//     navToggles.forEach(function(btn) {
+//       btn.setAttribute('aria-expanded', (!isOpen).toString());
+//     });
+    
+//     if (isOpen) {
+  //     mainNav.classList.remove('nav-active');
+  //     setTimeout(function() {
+  //       mainNav.style.display = 'none';
+  //     }, 300);
+  //   } else {
+  //     mainNav.style.display = 'block';
+  //     setTimeout(function() {
+  //       mainNav.classList.add('nav-active');
+  //     }, 10);
+  //   }
+  // }
+  
+  // // Toggle button click
+  // navToggles.forEach(function(btn) {
+  //   btn.addEventListener('click', function(e) {
+  //     e.stopPropagation();
+  //     toggleNav();
+  //   });
+  // });
+  
+  // // Close menu when clicking on a link
+  // if (mainNav) {
+  //   var navLinks = mainNav.querySelectorAll('a');
+  //   navLinks.forEach(function(link) {
+  //     link.addEventListener('click', function() {
+  //       closeNav();
+  //     });
+  //   });
+  // }
+  
+  // // Close menu when clicking outside
+  // document.addEventListener('click', function(e) {
+  //   if (mainNav && mainNav.style.display === 'block') {
+  //     if (!mainNav.contains(e.target) && !e.target.closest('.nav-toggle')) {
+  //       closeNav();
+  //     }
+  //   }
+  // });
+
+  // footer contact forms - validation + real submit via FormSubmit (sends to Outlook)
+  
+
+  /*
+   * Local storage helpers
+   * - store submissions locally so you can access them later
+   * - structure: array of { id, formId, name, email, message, createdAt, status, meta }
+   */
+  
+
+  // Save a new submission locally and return its local id
+  
+
+  // Update a previously saved submission's status/meta by id
+  
+
+  // Expose a simple accessor on window for quick retrieval in the console
+ 
+
   // Autoplay background music
-  var musicToggle = document.getElementById('music-toggle');
-  var bgMusic = document.getElementById('bg-music');
-  var isPlaying = false;
+//   var musicToggle = document.getElementById('music-toggle');
+//   var bgMusic = document.getElementById('bg-music');
+//   var isPlaying = false;
 
-  if(musicToggle && bgMusic) {
-    musicToggle.addEventListener('click', function() {
-      if(isPlaying) {
-        bgMusic.pause();
-        musicToggle.textContent = '🔇';
-        isPlaying = false;
-        } 
-      else {
-        bgMusic.play().catch(function(e) {
-        console.log('Playback failed:', e);
-        });
-        musicToggle.textContent = '🔊';
-        isPlaying = true;
-      }
-    });
-  }
+//   if(musicToggle && bgMusic) {
+//     musicToggle.addEventListener('click', function() {
+//       if(isPlaying) {
+//         bgMusic.pause();
+//         musicToggle.textContent = '🔇';
+//         isPlaying = false;
+//         } 
+//       else {
+//         bgMusic.play().catch(function(e) {
+//         console.log('Playback failed:', e);
+//         });
+//         musicToggle.textContent = '🔊';
+//         isPlaying = true;
+//       }
+//     });
+//   }
 
-})();
+// })();
+
+
+
+
+
+
+
+
+// ===== SIMPLE PROGRESS ANIMATION =====
+
+const progressBars = document.querySelectorAll(".progress");
+
+window.addEventListener("load", () => {
+
+  progressBars.forEach(bar => {
+
+    const width = bar.style.width;
+
+    bar.style.width = "0";
+
+    setTimeout(() => {
+      bar.style.width = width;
+      bar.style.transition = "1.2s ease";
+    }, 200);
+
+  });
+
+});

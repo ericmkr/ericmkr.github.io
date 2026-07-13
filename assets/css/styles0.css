@@ -61,8 +61,8 @@ body {
     /* Background image for the whole site */
     background-image: url("../img/Portfolio\ bg.jpg");
     background-size: cover;
-    background-position: center top;
-    background-attachment: fixed;
+    background-position: center top;        ******************************************************************
+    background-attachment: fixed;       ******************************************************************
     background-repeat: no-repeat;
     color:var(--white);
     line-height:1.5;
@@ -111,7 +111,6 @@ body::before {
     display:flex;
     align-items:center;
     justify-content:space-between;
-    
 }
 
 .logo {
@@ -539,7 +538,7 @@ h2 {
 }
 
 .about-preview a:hover {
-    text-decoration:underline;
+    text-decoration: none;
 }
  
 .site-footer {
@@ -650,16 +649,13 @@ footer textarea {
 }
 
 /* Ensure link-like buttons don't show underline on hover/focus and center inside project cards */
-.view-btn:hover,
-.view-btn:focus {
+.view-btn:hover, .view-btn:focus {
     text-decoration: none;
 }
 
 .project .view-btn {
     align-self: center;
 }
-
-/* project modal removed (no longer used) */
 
 /* Submit confirmation overlay + modal */
 .submit-overlay {

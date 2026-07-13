@@ -4,11 +4,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="I am a UX/UI designer, passionate about creating inclusive and aesthetically pleasing interfaces."/>
+  <meta name="description" content="UX/UI Designer, Front-End Developer and QA Analyst creating high-performance digital products, intuitive user experiences and scalable web solutions for businesses, startups and ambitious ideas."/>      <!-- provide a short description for the web page and impacting SEO -->
+  <meta name="theme-color" content="#0f172a">
   <!-- <meta http-equiv="refresh" content="11"> Auto refresh page after 11sec  -->
   <title>Portfolio — Victor Eric MOUKOURI</title>
-  <!-- <link rel="icon" type="image/svg+xml" href="assets/img/Logo mkr.svg"> -->
-  <!-- <link rel="icon" href="favicon.ico" /> -->
+  <link rel="preload" as="image" href="assets/img/Portfolio-bg.jpg"/>
+  <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg"/>
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico"/>
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180"/>
+  <link rel="manifest" href="assets/favicon/site.webmanifest"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous"/>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,129 +23,184 @@
 
 <body>
   <header class="header">
-    <!-- <nav class="navbar"> -->
-    <div class="header-left">
-      <a class="logo" href="index.html" title="" target="_self"> 
-        <img class="" src="assets/img/Logo mkr.jpg" alt="mkr-logo">
+    <div class="navbar-left">
+      <a class="logo" href="index.html" target="_self"> 
+        <img loading="lazy" decoding="async" src="assets/img/logo-mkr.png" alt="MKR brand logo - Homepage"/>
       </a>
-      
-      <div class="header-right">
-          <!-- <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button> -->
-          <nav class="main-nav" aria-label="Navigation principale ">
-            <ul class="navbar-nav">
-              <li class="navbar item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-              <li>
-                <a href="about.html">About</a>
-              </li>
-              <li>
-                <a href="portfolio.html">Portfolio</a>
-              </li>
-              <li>
-                <a href="index.html#contact">Contact</a>
-              </li>
-            </ul>
-          </nav>
+    </div>
 
-          <a class="btn-timing" href="">⏱ Timing</a>
-
-           <!-- <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button> -->
+    <div class="navbar-center">
+      <div class="clock-container">
+        <h2 class="city">Douala</h2>
+        <div>   
+          <div id="date" class="date"></div> 
+          <div id="time" class="time"></div>   
         </div>
       </div>
-    <!-- </nav> -->
+    </div>          
+      
+    <div class="navbar-right">      
+      <nav class="navbar" aria-label="Navigation principale ">    
+        <ul class="navbar-nav">    
+          <li class="navbar-item">    
+            <a class="navbar-link active" href="index.html">Home</a>           
+          </li>
+          <li class="navbar-item">              
+            <a class="navbar-link" href="about.html">About</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="portfolio.html">Portfolio</a>     
+          </li>
+          <li class="navbar-item">   
+            <a class="navbar-link" href="#contact">Contact</a>
+          </li>
+        </ul> 
+      </nav>
+        
+      <a class="btn-timing" href="404.html">⏱ Timing</a>      <!-- div? Make it btn and disabled -->      
+      <!-- <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button> -->
+      <!-- <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">    
+        <span class="navbar-toggler-icon"></span>    
+      </button> -->
+    </div>  
   </header>
 
-  <main>
-    <section class="hero parallax animate-fade" data-parallax-speed="0.07">
-      <div class="container">
-        <img src="assets/img/mkr.jpg" alt="photo de Victor Eric MOUKOURI" class="hero-img" loading="lazy" decoding="async">
-        <h1>Web Designer & Developper</h1>
-        <p class="lead">Young African artist specializing in web and mobile interface design. I combine aesthetics and user experience.</p>
-        <p><a class="btn" href="portfolio.html">See my achievements</a></p>
+  <main class="main-content">
+    <section class="hero parallax animate-fade" data-parallax-speed="0.07" aria-label="Section d'introduction">
+      <div class="hero-container">
+        <img class="mkr-img" src="assets/img/mkr.jpg" alt="Portrait of Victor Eric MOUKOURI looking toward the camera with a professional yet approachable expression"/>
+        <h1 class="hero-title">Digital Product Designer & Front-End Engineer</h1>      <!-- add class ? -->
+        <p class="hero-desc">My name is <em>Eric MOUKOURI</em>. I transform ideas into digital products through thoughtful design, scalable development and rigorous quality assurance.</p>
+        <a class="hero-cta" href="#portfolio">Discover My Projects</a>
       </div>
     </section>
 
-    <section class="about-preview">
-      <h2>About</h2>
-      <div class="about-content">
-        <p>I am a UX/UI designer, passionate about creating inclusive and aesthetically pleasing interfaces. I enjoy transforming ideas into clear digital experiences.</p>
+    <section id="about" class="about-preview parallax animate-fade" data-parallax-speed="0.07"">
+      <h2 class="section-title">About</h2>
+      <div class="about-container">
+        <p>I am a creative and versatile professional with a focus on design, 
+          branding, digital products, and visual innovation. 
+          My career has been self-taught, built through intensive practice, 
+          personal research, experimentation, and the completion of concrete 
+          projects combining technology, art direction, and creative strategy. 
+          A few badges to describe my work.</p>
         <ul class="about-highlights">
-          <li>Web & Mobile interface design</li>
+          <li>Web & Mobile UX/UI design</li>
           <li>Interactive prototyping</li>
           <li>User research & testing</li>
+          <li>Graphic design & branding</li>
+          <!-- <li>Passion for art and technology</li> -->
+          <li>Committed to accessibility and inclusivity</li>
+          <li>Continuous learning and growth</li>
+          <li >Collaborative team player</li>
+          <!-- <li >Creative problem solver</li> -->
+          <!-- <li >Driven by user-centered design principles</li> -->
+          <!-- <li>Dedicated to creating meaningful digital experiences</li> -->
+          <li>Always seeking new challenges and opportunities to grow</li>
+          <!-- <li>Believer in the importance of user feedback and testing in the design process</li> -->
+          <li>Dedicated to staying up-to-date with the latest design trends and technologies</li>
         </ul>
         <p><a class="more" href="about.html">More...</a></p>
       </div>
     </section>
 
-    <section class="featured container animate-fade">
-      <h2>Projects</h2>
-      <div class="grid">
+    <section id="portfolio" class="portfolio-preview parallax animate-fade" data-parallax-speed="0.07"">
+      <h2 class="section-title">Projects</h2>
+      <div class="portfolio-highlight">
         <a href="portfolio.html#flowtrack" class="card-link">
           <article class="card">
-            <img src="assets/img/FlowTrack - HQ Wireframes.png" alt="Aperçu projet 1" loading="lazy" decoding="async">
-            <h3>Mobile app UX/UI Design — FlowTrack</h3>
+            <img src="assets/img/FlowTrack logo.png" alt="FlowTrack mobile app project preview showing the app branding and logo for a task management interface" loading="lazy" decoding="async"/>
+            <h3>Mobile app design — FlowTrack</h3>
             <p>Thoughtful UX design for a mobile task management application.</p>
           </article>
         </a>
 
-        <a href="portfolio.html#worldwidewall" class="card-link">
+        <a href="portfolio.html#eden-market" class="card-link">
           <article class="card">
-            <img src="assets/img/www-icon-vector-website-logo.png" alt="Aperçu projet 3" loading="lazy" decoding="async">
-            <h3>Low-fidelity website mockup — World Wide Wall</h3>
-            <p>Design a low fidelity mockup for advertising agency World Wide Wall.</p>
+            <img src="assets/img/eden market logo.jpg" alt="Eden Market project preview showing the app branding and visual design elements for a marketplace app" loading="lazy" decoding="async"/>
+            <h3>Web app design— Eden Market</h3>
+            <p>Setup a high fidelity mockup (Homepage) for marketplace Eden.</p>
+          </article>
+        </a>
+
+        <a href="portfolio.html#oncolink" class="card-link">
+          <article class="card">
+            <img src="assets/img/OncoLink-splash-logo.png" alt="ONCOLINK project preview showing the app branding and visual design elements for a medical support app" loading="lazy" decoding="async"/>
+            <h3>Mobile app design — ONCOLINK</h3>
+            <p>Design a visual identity through lo-fi and hi-fi wireframes for ONCOLINK</p>
           </article>
         </a>
       </div>
     </section>
+        
+    <!-- <button id="music-toggle" class="music-toggle" type="button" aria-label="Toggle background music">🔇</button>
+    <audio id="bg-music" loop controls>
+      <source src="assets/audio/The_Weeknd_-_Heartless_(Official_Video).mp3" type="audio/mpeg">
+    </audio> -->
 
-            <!-- <button id="music-toggle" class="music-toggle" type="button" aria-label="Toggle background music">
-              🔇
-            </button>
-            
-            <audio id="bg-music" loop>
-              <source src="assets/audio/The_Weeknd_-_Heartless_(Official_Video).mp3" type="audio/mpeg">
-            </audio>
-
-            <audio controls>
-            <source src="audio.ogg" type="audio/ogg" controls/>
-            <source src="audio.wav" type="audio/wav" />
-            <source src="audio.mp3" type="audio/mpeg" />
-            </audio>
-
-            <video controls width="400" muted loop poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217">
-            <source src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4" type="video/mp4" />
-            <source src="https://cdn.freecodecamp.org/curriculum/labs/mapmethod.webm" type="video/webm" />
-            <source src="https://cdn.freecodecamp.org/curriculum/labs/mapmethod.ogg" type="video/ogg" />
-            </video>
-            -->
-
+    <!-- <audio controls>
+      <source src="audio.ogg" type="audio/ogg" controls/>
+      <source src="audio.wav" type="audio/wav" />
+      <source src="audio.mp3" type="audio/mpeg" />
+    </audio> -->
+          
+    <!-- <video controls width="400" muted loop poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217">
+      <source src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4" type="video/mp4" />
+      <source src="https://cdn.freecodecamp.org/curriculum/labs/mapmethod.webm" type="video/webm" />
+      <source src="https://cdn.freecodecamp.org/curriculum/labs/mapmethod.ogg" type="video/ogg" />
+    </video> -->
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-info">
-      </div>
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">⇧</button>
+
+  <footer>
+    <div class="container-footer parallax animate-fade" data-parallax-speed="0.07"> <!-- One must go -->
       <div id="contact" class="footer-contact">
-        <h3>Contact</h3>
-        <form id="footer-contact-form" class="" method="">
+        <h2 class="section-title">Let's work together.</h2>
+        <p style="font-size: 17px;">Do you have a project in mind? Feel free to contact me to discuss your needs</p>
+        <!-- <h3>Contact</h3> -->
+        <form class="footer-contact-form" action="https://formsubmit.co/victorericmoukouri@outlook.com" method="POST">
           <label for="name">Name</label>
-          <input id="name" name="name" placeholder="Enter your name here" required>
+          <input id="name" name="name" type="text" placeholder="Enter your name here" size="30" required>
           <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="Enter tour email adress here" required>
+          <input id="email" name="email" type="email" placeholder="Enter your email address here" minlength="7" maxlength="32" size="30" required>
           <label for="message">Message</label>
-          <textarea id="message" name="message" rows="3" placeholder="What do you need ?" required></textarea>
-          <button type="submit" class="btn">Submit</button>
-          <p id="contact-feedback" class="feedback" aria-live="polite"></p>
-        </form>
-        <p>&copy; <span id="year"></span> MKR Gang</p>
+          <textarea id="message" name="message" rows="3" cols="30" placeholder="What do you need ?" required></textarea>
+          <button type="submit" class="btn-submit">Submit</button>
+          <p class="feedback" aria-live="polite">Thanks for your message!</p>
+        </form> 
+        <small>&copy; 2026 MKR Gang. All rights reserved.</small>
       </div>
     </div>
-  </footer>
+    
+    <!-- <fieldset>
+      <legend>Personal Information</legend>      
+      <input id="yes-option" type="radio/checkbox" name="choice" value="yes/no" />        (input checked) to make it checked by default
+      <label for="yes-option">Yes</label>
 
-  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">↑</button>
+      <label>
+        <input type="checkbox" value="terms">
+      I agree to the <a href="/terms">terms and conditions</a>
+    </label>
+    </fieldset> -->
+        
+    <!-- <label for="city">Choose a City: </label>
+    <select id="city" name="city">                                                          (option selected) to make it selected by default
+      <option value="new-york">New York</option>
+      <option value="los-angeles">Los Angeles</option>
+      <option value="chicago">Chicago</option>
+      <option value="miami">Miami</option>
+    </select> -->
+  </footer>
+  
+  <!-- <script src="assets/js/app.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/clock.js"></script>
+  <script src="assets/js/backtotop.js"></script>
+  <script src="assets/js/contact.js"></script>
+  <script src="assets/js/modal.js"></script>
+  <script src="assets/js/parallax.js"></script>
+  <script src="assets/js/storage.js"></script> -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

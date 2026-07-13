@@ -1,12 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <!-- ASTUCE RESPONSIVE: Meta viewport permet l'adaptation au reste de l'écran selon la largeur du device -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <meta http-equiv="refresh" content="45"> Auto refresh page after 11sec  -->
-  <title>Portfolio — Achievements</title>
+  <meta name="description" content="I am a UX/UI designer, passionate about creating inclusive and aesthetically pleasing interfaces."/>      <!-- provide a short description for the web page and impacting SEO -->
+  <meta name="theme-color" content="#0f172a">
+  <!-- <meta http-equiv="refresh" content="11"> Auto refresh page after 11sec  -->
+  <title>Portfolio — Victor Eric MOUKOURI</title>
+  <link rel="preload" as="image" href="assets/img/Portfolio-bg.jpg"/>
+  <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg"/>
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico"/>
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180"/>
+  <link rel="manifest" href="assets/favicon/site.webmanifest"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous"/>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,28 +22,52 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <img src="assets/img/Logo mkr.jpg" alt="mkr-logo">
+    <header class="header">
+    <div class="navbar-left">
+      <a class="logo" href="index.html" target="_self"> 
+        <img loading="lazy" decoding="async" src="assets/img/logo-mkr.png" alt="MKR brand logo with angular white letters on a black background">
       </a>
-      <div class="header-right">
-        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
-        <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </nav>
-        <a class="btn-timing" href="">⏱ Timing</a>
-      </div>
     </div>
+
+    <div class="navbar-center">
+      <div class="clock-container">
+        <h2 class="city">Douala</h2>
+        <div>   
+          <div id="date" class="date"></div> 
+          <div id="time" class="time"></div>   
+        </div>
+      </div>
+    </div>          
+      
+    <div class="navbar-right">      
+      <nav class="navbar" aria-label="Navigation principale ">    
+        <ul class="navbar-nav">    
+          <li class="navbar-item">    
+            <a class="navbar-link" href="index.html">Home</a>           
+          </li>
+          <li class="navbar-item">              
+            <a class="navbar-link" href="about.html">About</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link active" href="portfolio.html">Portfolio</a>     
+          </li>
+          <li class="navbar-item">   
+            <a class="navbar-link" href="#contact">Contact</a>
+          </li>
+        </ul> 
+      </nav>
+        
+      <a class="btn-timing" href="404.html">⏱ Timing</a>      <!-- div? Make it btn and disabled -->      
+      <!-- <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button> -->
+      <!-- <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">    
+        <span class="navbar-toggler-icon"></span>    
+      </button> -->
+    </div>  
   </header>
 
-  <main class="container">
-    <h1>Portfolio</h1>
+
+  <main class="container parallax animate-fade" data-parallax-speed="0.07">
+    <!-- <h1>Portfolio</h1> -->
     <p class="lead">Selected projects showcasing my skills in UX/UI, design, and visualization.</p>
 
     <section class="portfolio-grid">
@@ -56,32 +88,31 @@
           </ul>
           <p class="tools"><strong>Tools :</strong> Miro, Visily, Google Apps Script, Gamma.</p>
         </div>
-        <a class="view-btn" href="https://gamma.app/docs/FlowTrack-84omtaeba4fym08?mode=present#card-1npkzejpg0x4i8j" target="_blank" rel="noopener noreferrer">See the case</a>
-        <!-- <button class="view-btn" data-project="FlowTrack" data-title="FlowTrack" href="https://gamma.app/docs/FlowTrack-84omtaeba4fym08?mode=present#card-1npkzejpg0x4i8j">See the case</button> -->
+        <button class="view-btn" data-project="FlowTrack" data-title="FlowTrack">See the case</button>
       </article>
 
-      <!-- <article class="project animate-fade" id="Robbie Lens Photographie" data-id="2">
-        <img src="assets/img/Robbie Lens - Web Portfolio.png" alt="Robbie Lens Portfolio" loading="lazy" decoding="async">
-        <h3>Website Portfolio — Robbie Lens Photographie</h3>
-        <p class="summary">Portfolio-style website for photographer.</p>
+      <article class="project animate-fade" id="Robbie Lens Photographie" data-id="2">
+        <img src="assets/img/eden market logo.jpg" alt="Robbie Lens Portfolio" loading="lazy" decoding="async">
+        <h3>Eden Market</h3>
+        <p class="summary">E-market mobile app </p>
         <div class="case">
           <h4>Problem</h4>
           <p>Robbie Lens, a passionate photographer, needs a professional website to showcase her portfolio and highlight the quality of her work.</p>
           <h4>Approach</h4>
           <p>Gather information about Robbie Lens, her content and services to offer.</p>
-          <h4>Results</h4>
+          <!-- <h4>Results</h4>
           <ul>
             <li>Réduction du temps de génération de rapport : 40% plus rapide.</li>
             <li>Adoption accélérée grâce aux vues prédéfinies et templates réutilisables.</li>
-            <li>ROI démontré : économie de 20h/mois par utilisateur.</li>
+            <li>ROI démontré : économie de 20h/mois par utilisateur.</li> -->
           </ul>
           <p class="tools"><strong>Tools :</strong> Visual Studio Code, CodePen, ColorZilla, OpenClassrooms.</p>
         </div>
         <button class="view-btn" data-project="Robbie Lens Photographie" data-title="Robbie Lens Photographie">See the case</button>
-      </article> -->
+      </article>
 
       <article class="project animate-fade" id="World Wide Wall" data-id="3">
-        <img src="assets/img/World Wide Wall - low fidelity mockup.jpg" alt="World Wide Wall website" loading="lazy" decoding="async">
+        <img src="assets/img/OncoLink-splash-logo.png" alt="ONCOLINK mobile app showcase" loading="lazy" decoding="async">
         <h3>Low-fidelity mockup for an advertising agency website — World Wide Wall</h3>
         <p class="summary">A low-fidelity mockup illustrating the structure and key features of the World Wide Wall advertising agency website, focusing on layout, navigation, and the presentation of core services.</p>
         <div class="case">
@@ -97,37 +128,63 @@
           </ul> -->
           <p class="tools"><strong>Tools :</strong> Miro, Visily.</p>
         </div>
-        <a class="view-btn" href="https://app.visily.ai/projects/3fb8f72f-366d-4a1a-9aca-bc5499873cae/boards/2289437" target="_blank" rel="noopener noreferrer">See the case</a>
-        <!-- <button class="view-btn" data-project="World Wide Wall" data-title="World Wide Wall">See the case</button> -->
+        <button class="view-btn" data-project="World Wide Wall" data-title="World Wide Wall">See the case</button>
       </article>
     </section>
   </main>
 
   
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-info">
-      </div>
+
+
+
+
+
+<footer>
+    <div class="container-footer"> <!-- One must go -->
       <div id="contact" class="footer-contact">
-        <h3>Contact</h3>
-        <form id="footer-contact-form">
+        <h2>Let's work together.</h2>
+        <p>Do you have a project in mind? Feel free to contact me to discuss your needs</p>
+        <!-- <h3>Contact</h3> -->
+        <form class="footer-contact-form" action="https://formsubmit.co/victorericmoukouri@outlook.com" method="POST">
           <label for="name">Name</label>
-          <input id="name" name="name" required>
+          <input id="name" name="name" type="text" placeholder="Enter your name here" size="30" required>
           <label for="email">Email</label>
-          <input id="email" name="email" type="email" required>
+          <input id="email" name="email" type="email" placeholder="Enter your email address here" minlength="7" maxlength="32" size="30" required>
           <label for="message">Message</label>
-          <textarea id="message" name="message" rows="3" required></textarea>
-          <button type="submit" class="btn">Submit</button>
-          <p id="contact-feedback" class="feedback" aria-live="polite"></p>
-        </form>
-        <p>&copy; <span id="year"></span> MKR Gang</p>
+          <textarea id="message" name="message" rows="3" cols="30" placeholder="What do you need ?" required></textarea>
+          <button type="submit" class="btn-submit">Submit</button>
+          <p class="feedback" aria-live="polite">Thanks for your message!</p>
+        </form> 
+        <small>&copy; 2026 MKR Gang. All rights reserved.</small>
       </div>
     </div>
+    
+    <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">⇧</button>
+  
+    <!-- <fieldset>
+      <legend>Personal Information</legend>      
+      <input id="yes-option" type="radio/checkbox" name="choice" value="yes/no" />        (input checked) to make it checked by default
+      <label for="yes-option">Yes</label>
+    </fieldset> -->
+        
+    <!-- <label for="city">Choose a City: </label>
+    <select id="city" name="city">                                                          (option selected) to make it selected by default
+      <option value="new-york">New York</option>
+      <option value="los-angeles">Los Angeles</option>
+      <option value="chicago">Chicago</option>
+      <option value="miami">Miami</option>
+    </select> -->
   </footer>
-
-  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">↑</button>
-
+  
+  <!-- <script src="assets/js/app.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/clock.js"></script>
+  <script src="assets/js/backtotop.js"></script>
+  <script src="assets/js/contact.js"></script>
+  <script src="assets/js/modal.js"></script>
+  <script src="assets/js/parallax.js"></script>
+  <script src="assets/js/storage.js"></script> -->
   <script src="assets/js/main.js"></script>
 </body>
-</html>
+</html>>

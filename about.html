@@ -1,12 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <!-- ASTUCE RESPONSIVE: Meta viewport permet l'adaptation au reste de l'écran selon la largeur du device -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <meta http-equiv="refresh" content="45"> Auto refresh page after 11sec  -->
-  <title>Portfolio — About</title>
+  <meta name="description" content="I am a UX/UI designer, passionate about creating inclusive and aesthetically pleasing interfaces."/>      <!-- provide a short description for the web page and impacting SEO -->
+  <meta name="theme-color" content="#0f172a">
+  <!-- <meta http-equiv="refresh" content="11"> Auto refresh page after 11sec  -->
+  <title>Portfolio — Victor Eric MOUKOURI</title>
+  <link rel="preload" as="image" href="assets/img/Portfolio-bg.jpg"/>
+  <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg"/>
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico"/>
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" sizes="180x180"/>
+  <link rel="manifest" href="assets/favicon/site.webmanifest"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous"/>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,69 +22,294 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <img src="assets/img/Logo mkr.jpg" alt="mkr-logo">
+  <header class="header">
+    <div class="navbar-left">
+      <a class="logo" href="index.html" target="_self"> 
+        <img loading="lazy" decoding="async" src="assets/img/logo-mkr.png" alt="MKR brand logo with angular white letters on a black background"/>
       </a>
-      <div class="header-right">
-        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
-        <nav id="main-nav" class="main-nav" aria-label="Navigation principale">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-        </nav>
-        <a class="btn-timing" href="">⏱ Timing</a>
-      </div>
     </div>
+
+    <div class="navbar-center">
+      <div class="clock-container">
+        <h2 class="city">Douala</h2>
+        <div>   
+          <div id="date" class="date"></div> 
+          <div id="time" class="time"></div>   
+        </div>
+      </div>
+    </div>          
+      
+    <div class="navbar-right">      
+      <nav class="navbar" aria-label="Navigation principale ">    
+        <ul class="navbar-nav">    
+          <li class="navbar-item">    
+            <a class="navbar-link" href="index.html">Home</a>           
+          </li>
+          <li class="navbar-item">              
+            <a class="navbar-link active" href="about.html">About</a>
+          </li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="portfolio.html">Portfolio</a>     
+          </li>
+          <li class="navbar-item">   
+            <a class="navbar-link" href="#contact">Contact</a>
+          </li>
+        </ul> 
+      </nav>
+        
+      <a class="btn-timing" href="404.html">⏱ Timing</a>      <!-- div? Make it btn and disabled -->      
+      <!-- <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button> -->
+      <!-- <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">    
+        <span class="navbar-toggler-icon"></span>    
+      </button> -->
+    </div>  
   </header>
 
   <main class="container">
-    <h1>About</h1>
-    <p class="lead">UX/UI designer based in Africa. I balance user research, visual hierarchy, and aesthetics to produce effective interfaces.</p>
+    <h1 class="about-me-title parallax animate-fade" data-parallax-speed="0.07"">About me</h1>
+    <p class="lead parallax animate-fade" data-parallax-speed="0.07"">UX/UI and web designer based in Africa, I am a creative and versatile professional
+      with a focus on design, branding, digital products, and visual innovation. 
+      My career has been self-taught through intensive practice, personal research, experimentation, 
+      and the completion of concrete projects combining technology, art direction, and creative strategy.<br><br>
+      Over time, I've developed an approach centered on problem-solving, functional aesthetics, 
+      and the design of modern visual experiences. I primarily work on user interface (UI/UX) design projects,
+      visual identity, digital content creation, web prototyping, and creative direction.  
+      My goal is to produce cohesive, intuitive, and impactful visual solutions that address real needs 
+      while building a strong brand identity.
+    </p>
 
-    <section class="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li>Interface design (web & mobile)</li>
-        <li>Prototyping (Visily, Figma)</li>
-        <li>User research & testing</li>
-        <li>Visualization and visual storytelling</li>
-      </ul>
+    <section class="skills-tools-wrapper-section parallax animate-fade" data-parallax-speed="0.07"">
+      <div class="skills-tools-wrapper">
+        
+        <!-- ===== CORE SKILLS ===== -->
+        <section class="skills-section parallax animate-fade" data-parallax-speed="0.07"">
+          <h2 class="section-title">Core Skills</h2>
+          <div class="skill-item">
+            <div class="skill-header"> 
+              <div class="skill-left">
+                <div class="icon-box">  
+                  <i class="fa-regular fa-user"></i>    
+                </div>
+                <span>UX / UI Design</span>
+              </div>
+              <span class="percent">80%</span>       
+            </div>
+            <div class="progress-bar">
+              <div class="progress fill-80"></div>
+            </div>
+          </div>
+  
+          <div class="skill-item">  
+            <div class="skill-header">
+              <div class="skill-left">
+                <div class="icon-box">
+                  <i class="fa-regular fa-user"></i>    
+                </div>
+                <span>Front-End Development</span>  
+              </div>  
+              <span class="percent">95%</span>  
+            </div>  
+            <div class="progress-bar">  
+              <div class="progress fill-95"></div>  
+            </div>  
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-header">
+              <div class="skill-left">
+                <div class="icon-box">
+                  <i class="fa-regular fa-user"></i>    
+                </div>
+                <span>Prototyping</span>
+              </div>
+              <span class="percent">70%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress fill-70"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-header">
+              <div class="skill-left">
+                <div class="icon-box">
+                  <i class="fa-regular fa-user"></i>    
+                </div>
+                <span>Critical Thinking</span>
+              </div>
+              <span class="percent">85%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress fill-85"></div>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-header">
+              <div class="skill-left">
+                <div class="icon-box">
+                  <i class="fa-regular fa-user"></i>    
+                </div>
+                <span>Design systems</span>
+              </div>
+              <span class="percent">80%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress fill-80"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== TOOLS I USE ===== -->
+        <section class="tools-section parallax animate-fade" data-parallax-speed="0.07"">
+          <h2 class="section-title">Here are the tools I work with</h2>
+
+          <div class="tools-grid">
+            <a class="tool-img">
+              <div class="tool-icon">
+                <img class="tool-logo" src="assets/img/Visual_Studio_Code_1.35_icon.svg.png"/>
+              </div>
+              <span>VS Code</span>
+            </a>
+
+            <a class="tool-img">
+              <div class="tool-icon">
+                <img class="tool-logo" src="assets/img/github-white-icon.webp"/>
+              </div>
+              <span>GitHub</span>
+            </a>
+
+            <a class="tool-img">
+              <div class="tool-icon">
+                <img class="tool-logo" src="assets/img/Official_Odoo_logo.svg.png"/>
+              </div>
+              <span>Odoo</span>
+            </a>
+
+            <a class="tool-img">
+              <div class="tool-icon">
+                <img class="tool-logo" src="assets/img/images.png"/>
+              </div>
+              <span>Figma</span>
+            </a>
+
+            <a class="tool-img">
+              <div class="tool-icon">
+                <img class="tool-logo" src="assets/img/visily(2).svg"/>
+              </div>
+              <span>Visily</span>
+            </a>
+
+            <a class="tool-img">
+              <div class="tool-icon">
+                <img class="tool-logo" src="assets/img/Canva-App-Logo-Small.png"/>
+              </div>
+              <span>Canva</span>
+            </a>
+
+          </div>
+        </section>  
+      </div>    
     </section>
 
-    <section>
+    <!-- ===== CONNECT WITH ME ===== -->
+    <section class="connect-section parallax animate-fade" data-parallax-speed="0.07"">
+      <h2 class="section-title">Connect With Me</h2>
+
+      <div class="connect-grid">
+
+        <a href="mailto:victorericmoukouri@outlook.com" class="connect-card">
+          <div class="connect-icon">
+            <img src="assets/img/Mail-Icon-White-on-Grey.png" class="connect-logo"/>
+          </div>
+          <span>Email</span>
+          <!-- <p>victorericmoukouri@outlook.com</p> -->
+        </a>
+
+        <a href="https://wa.me/237698826697" target="_blank" class="connect-card">
+          <div class="connect-icon">
+            <img src="assets/img/WhatsApp.svg.webp" class="connect-logo"/>
+          </div>
+          <span>WhatsApp</span>
+        </a>
+
+        <!-- <a href="#" class="connect-card">
+          <div class="connect-icon">
+            <i class="fa-brands fa-github"></i>
+          </div>
+          <span>LinkedIn</span>
+        </a> -->
+
+        <!-- <a href="#" class="connect-card">
+          <div class="connect-icon">
+            <i class="fa-brands fa-twitter"></i>
+          </div>
+          <span>GitHub</span>
+        </a> -->
+
+      </div>
+    </section>
+
+    <!-- <section>
       <h2>Methodology</h2>
       <p>I start with research, I define paths, then I iterate on testable prototypes to validate UX choices.</p>
-    </section>
+    </section> -->
 
+    <!-- <section class="tools">
+      <h2>Tools and technologies I use</h2>
+
+      <dl>
+        <dt>UI/UX Design & Prototyping</dt>
+        <dd>Figma, Visily.</dd>
+        <img class="tool-img" src="" alt="Figma">
+        <img class="tool-img" src="" alt=""Visily>
+
+        <dt>Web Development & Integration</dt>
+        <dd>HTML5, CSS3 and JavaScript.</dd>
+
+        <dt>Productivity & Collaboration</dt>
+        <dd>GitHub, Discord.</dd>
+      </dl>
+    </section> -->
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-info">
+  <footer>
+      <div class="container-footer parallax animate-fade" data-parallax-speed="0.07""> <!-- One must go -->
         <div id="contact" class="footer-contact">
-        <h3>Contact</h3>
-        <form id="footer-contact-form">
-          <label for="name">Name</label>
-          <input id="name" name="name" required>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required>
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="3" required></textarea>
-          <button type="submit" class="btn">Submit</button>
-          <p id="contact-feedback" class="feedback" aria-live="polite"></p>
-        </form>
-        <p>&copy; <span id="year"></span> MKR Gang</p>
+          <h2>Let's work together.</h2>
+          <p>Do you have a project in mind? Feel free to contact me to discuss your needs</p>
+          <!-- <h3>Contact</h3> -->
+          <form class="footer-contact-form" action="https://formsubmit.co/victorericmoukouri@outlook.com" method="POST">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Enter your name here" size="30" required>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Enter your email address here" minlength="7" maxlength="32" size="30" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="3" cols="30" placeholder="What do you need ?" required></textarea>
+            <button type="submit" class="btn-submit">Submit</button>
+            <p class="feedback" aria-live="polite">Thanks for your message!</p>
+          </form> 
+          <small>&copy; 2026 MKR Gang. All rights reserved.</small>
+        </div>
       </div>
-    </div>
+      
+      <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">⇧</button>
+    
+      <!-- <fieldset>
+        <legend>Personal Information</legend>      
+        <input id="yes-option" type="radio/checkbox" name="choice" value="yes/no" />        (input checked) to make it checked by default
+        <label for="yes-option">Yes</label>
+      </fieldset> -->
+          
+      <!-- <label for="city">Choose a City: </label>
+      <select id="city" name="city">                                                          (option selected) to make it selected by default
+        <option value="new-york">New York</option>
+        <option value="los-angeles">Los Angeles</option>
+        <option value="chicago">Chicago</option>
+        <option value="miami">Miami</option>
+      </select> -->
   </footer>
-
-  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">↑</button>
-
+  
   <script src="assets/js/main.js"></script>
 </body>
-</html>
+</html>>
